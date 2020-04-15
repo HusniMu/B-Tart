@@ -32,7 +32,7 @@ class PostController extends Controller
 
         $randomPosts = Post::where('slug','!=',$slug)
                     ->published()
-                    ->take(3)->inRandomOrder()->get();
+                    ->take(4)->inRandomOrder()->get();
         return view('post', compact('post', 'randomPosts'));
     }
 

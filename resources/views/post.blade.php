@@ -2,295 +2,116 @@
 
 
 @section('title',$post->title)
-
-
-@push('css')
-<link href="{{asset('assets/frontend/css/single-post/styles.css')}}" rel="stylesheet">
-<link href="{{asset('assets/frontend/css/single-post/responsive.css')}}" rel="stylesheet">
-
-<style>
-    .header-bg{
-        height: 400px;
-        width: 100%;
-        background-image: url({{URL::asset('storage/post/'.$post->image)}});
-        background-size: cover;
-        background-position: center;
-    }
-    .favorite_posts{
-        color:blue;
-    }
-    </style>
-@endpush
-
-
 @section('content')
-<div class="header-bg">
-</div>
 
-<section class="post-area section">
+<!-- Start Shop Detail  -->
+<div class="shop-detail-box-main">
     <div class="container">
-
         <div class="row">
-
-            <div class="col-lg-8 col-md-12 no-right-padding">
-
-                <div class="main-post">
-
-                    <div class="blog-post-inner">
-
-                        <div class="post-info">
-
-                            <div class="left-area">
-                                <a class="avatar" href="#"><img src="{{URL::asset('storage/profile/'.$post->user->image)}}" alt="{{$post->user->image}}"></a>
-                            </div>
-
-                            <div class="middle-area">
-                                <a class="name" href="#"><b>{{$post->user->name}}</b></a>
-                                <h6 class="date">{{$post->created_at->diffForHumans()}}</h6>
-                            </div>
-
-                        </div><!-- post-info -->
-
-                    <h1 class="title"><a href="#"><b>{{$post->title}}</b></a></h1>
-
-                        <div class="para">
-                            {!! html_entity_decode($post->body) !!}
-                        </div>
-
-                        <ul class="tags">
-                            @foreach ($post->tags as $tag)
-                            <li><a href="{{route('tag.posts',$tag->slug)}}">{{$tag->name}}</a></li>
-                            @endforeach
-                        </ul>
-                    </div><!-- blog-post-inner -->
-
-                    <div class="post-icons-area">
-                        <ul class="post-icons">
-                            @guest
-                            <li>
-                                <a href="javascript:void()0;" onclick="toastr.info('To add favorite list. You neew to login first!.','Info'),{
-                                    closeButton: true,
-                                    progressBar: true,
-                                }">
-                                    <i class="ion-heart"></i>
-                                    {{$post->favorite_to_users->count()}}
-                                </a>
-                            </li>
-                            @else
-                            <li>
-                                <a href="javascript:void()0;" onclick="document.getElementById('favorite-form-{{$post->id}}').submit();"
-                                class="{{ !Auth::user()->favorite_posts->where('pivot.post_id',$post->id)->count()==0? 'favorite_posts':''}}">
-                                        <i class="ion-heart"></i>
-                                        {{$post->favorite_to_users->count()}}
-                                </a>
-                                <form action="{{route('post.favorite',$post->id)}}" id="favorite-form-{{$post->id}}" method="post" style="display:none;">
-                                @csrf
-                                </form>
-                            </li>
-                            @endguest
-                            <li><a href="javascript:void()0;"><i class="ion-chatbubble"></i>{{$post->comments()->count()}}</a></li>
-                            <li><a href="javascript:void()0;"><i class="ion-eye"></i>{{$post->view_count}}</a></li>
-                        </ul>
-
-                        <ul class="icons">
-                            <li>SHARE : </li>
-                            <li><a href="#"><i class="ion-social-facebook"></i></a></li>
-                            <li><a href="#"><i class="ion-social-twitter"></i></a></li>
-                            <li><a href="#"><i class="ion-social-pinterest"></i></a></li>
-                        </ul>
+            <div class="col-xl-5 col-lg-5 col-md-6">
+                <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active"> <img class="d-block w-100" src="{{URL::asset('storage/post/'.$post->image)}}" alt="First slide"> </div>
+                        <div class="carousel-item"> <img class="d-block w-100" src="images/big-img-02.jpg" alt="Second slide"> </div>
                     </div>
-
-                </div><!-- main-post -->
-            </div><!-- col-lg-8 col-md-12 -->
-
-            <div class="col-lg-4 col-md-12 no-left-padding">
-
-                <div class="single-post info-area">
-
-                    <div class="sidebar-area about-area">
-                        <h4 class="title"><b>ABOUT AUTHOR</b></h4>
+                    <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev">
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="sr-only">Previous</span>
+                </a>
+                    <a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    <span class="sr-only">Next</span>
+                </a>
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-1" data-slide-to="0" class="active">
+                            <img class="d-block w-100 img-fluid" src="images/smp-img-01.jpg" alt="" />
+                        </li>
+                        <li data-target="#carousel-example-1" data-slide-to="1">
+                            <img class="d-block w-100 img-fluid" src="images/smp-img-02.jpg" alt="" />
+                        </li>
+                        <li data-target="#carousel-example-1" data-slide-to="2">
+                            <img class="d-block w-100 img-fluid" src="images/smp-img-03.jpg" alt="" />
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-7 col-md-6">
+                <div class="single-product-details">
+                    <h2>{{$post->title}}</h2>
+                    <h5>Rp. {{number_format($post->harga, 2, ',', '.')}}</h5>
+                    <p class="available-stock"><span> Waktu pembuatan --:--:--</span>
                         <p>
-                            {{$post->user->about}}
-                        </p>
-                    </div>
+                            <h4>Description:</h4>
+                            <p>{!!$post->body!!}</p>
+                            <ul>
+                                <li>
+                                    <div class="form-group quantity-box">
+                                        <label class="control-label">Quantity</label>
+                                        <input class="form-control" value="0" min="0" max="20" type="number">
+                                    </div>
+                                </li>
+                            </ul>
 
-                    <div class="sidebar-area subscribe-area">
+                            <div class="price-box-bar">
+                                <div class="cart-and-bay-btn">
+                                    <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a>
+                                    <a class="btn hvr-hover" data-fancybox-close="" href="#">Add to cart</a>
+                                </div>
+                            </div>
 
-                        <h4 class="title"><b>SUBSCRIBE</b></h4>
-                        <div class="input-area">
-                            <form method="post" action="{{route('subscriber.store')}}">
-                                @csrf
-                                <input class="email-input" name="email" type="email" placeholder="Enter your email">
-                                <button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
-                            </form>
-                        </div>
-
-                    </div><!-- subscribe-area -->
-
-                    <div class="tag-area">
-
-                        <h4 class="title"><b>CATEGORIES</b></h4>
-                        <ul>
-                            @foreach ($post->categories as $category)
-                        <li><a href="{{route('category.posts',$category->slug)}}">{{$category->name}}</a></li>
-                            @endforeach
-                        </ul>
-                        <h4 class="title"><b>TAG CLOUD</b></h4>
-                        <ul>
-                            @foreach ($post->tags as $tag)
-                            <li><a href="{{route('tag.posts',$tag->slug)}}">{{$tag->name}}</a></li>
-                            @endforeach
-                        </ul>
-
-                    </div><!-- subscribe-area -->
-
-                </div><!-- info-area -->
-
-            </div><!-- col-lg-4 col-md-12 -->
-
-        </div><!-- row -->
-
-    </div><!-- container -->
-</section><!-- post-area -->
-
-<section class="recomended-area section">
-    <div class="container">
-        <div class="row">
-        @if ($randomPosts->count()>2)
-            @foreach ($randomPosts as $randomPost)
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <div class="single-post post-style-1">
-
-                            <div class="blog-image"><img src="{{URL::asset('storage/post/'.$randomPost->image)}}" alt="{{$randomPost->image}}"></div>
-
-                            <a class="avatar" href="#"><img src="{{URL::asset('storage/profile/'.$randomPost->user->image)}}" alt="{{$randomPost->user->name}}"></a>
-
-                            <div class="blog-info">
-
-                                <h4 class="title"><a href="{{route('post.details',$randomPost->slug)}}"><b>{{$randomPost->title}}</b></a></h4>
-
-                                <ul class="post-footer">
-                                    @guest
-                                    <li>
-                                        <a href="javascript:void()0;" onclick="toastr.info('To add favorite list. You neew to login first!.','Info'),{
-                                            closeButton: true,
-                                            progressBar: true,
-                                        }">
-                                            <i class="ion-heart"></i>
-                                            {{$randomPost->favorite_to_users->count()}}
-                                        </a>
-                                    </li>
-                                    @else
-                                    <li>
-                                    <a href="javascript:void()0;" onclick="document.getElementById('favorite-form-{{$randomPost->id}}').submit();"
-                                    class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$randomPost->id)->count()==0? 'favorite_posts':''}}">
-                                            <i class="ion-heart"></i>
-                                            {{$randomPost->favorite_to_users->count()}}
-                                        </a>
-                                    <form action="{{route('post.favorite',$randomPost->id)}}" id="favorite-form-{{$randomPost->id}}" method="post" style="display:none;">
-                                    @csrf
-                                </form>
-                                    </li>
-                                    @endguest
-
-                                    <li><a href="javascript:void()0;"><i class="ion-chatbubble"></i>{{$randomPost->comments()->count()}}</a></li>
-                                    <li><a href="javascript:void()0;"><i class="ion-eye"></i>{{$randomPost->view_count}}</a></li>
-                                </ul>
-
-                            </div><!-- blog-info -->
-                        </div><!-- single-post -->
-                    </div><!-- card -->
-                </div><!-- col-md-6 col-sm-12 -->
-            @endforeach
-
-        @else
-
-        <div class="commnets-area">
-            <div class="comment">
-                <p>Not any recommendation posts.</p>
+                            <div class="add-to-btn">
+                                <div class="add-comp">
+                                    <a class="btn hvr-hover" href="#"><i class="fas fa-heart"></i> Add to wishlist</a>
+                                    <a class="btn hvr-hover" href="#"><i class="fas fa-sync-alt"></i> Add to Compare</a>
+                                </div>
+                                <div class="share-bar">
+                                    <a class="btn hvr-hover" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                                    <a class="btn hvr-hover" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a>
+                                    <a class="btn hvr-hover" href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                                    <a class="btn hvr-hover" href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a>
+                                    <a class="btn hvr-hover" href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                </div>
             </div>
         </div>
 
-        @endif
-
-        </div><!-- row -->
-
-    </div><!-- container -->
-</section>
-
-<section class="comment-section">
-    <div class="container">
-        <h4><b>POST COMMENT</b></h4>
-        <div class="row">
-
-            <div class="col-lg-8 col-md-12">
-                <div class="comment-form">
-                    @guest
-                        <p>For post a new comment. You need to login fist. <a href="{{route('login')}}">Login</a></p>
-                    @else
-                        <form method="post" action="{{route('comment.store',$post->id)}}">
-                            @csrf
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <textarea name="comment" rows="2" class="text-area-messge form-control"
-                                        placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
-                                </div><!-- col-sm-12 -->
-                                <div class="col-sm-12">
-                                    <button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
-                                </div><!-- col-sm-12 -->
-
-                            </div><!-- row -->
-                        </form>
-                    @endguest
-                </div><!-- comment-form -->
-
-                <h4><b>COMMENTS({{$post->comments()->count()}})</b></h4>
-
-                @if($post->comments()->count()>0)
-                    @foreach ($post->comments as $comment)
-                        <div class="commnets-area ">
-                            <div class="comment">
-
-                                <div class="post-info">
-
-                                    <div class="left-area">
-                                        <a class="avatar" href="#"><img src="{{URL::asset('storage/profile/'.$comment->user->image)}}" alt="{{$comment->user->image}}"></a>
+        {{-- featured product --}}
+        <div class="row my-5">
+            <div class="col-lg-12">
+                <div class="title-all text-center">
+                    <h1>Featured Products</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+                </div>
+                <div class="featured-products-box owl-carousel owl-theme">
+                    @foreach ($randomPosts as $randomPost)
+                        <div class="item">
+                            <div class="products-single fix">
+                                <div class="box-img-hover">
+                                    <img src="{{URL::asset('storage/post/'.$randomPost->image)}}" class="img-fluid" alt="{{$randomPost->title}}">
+                                    <div class="mask-icon">
+                                        <ul>
+                                            <li><a href="{{route('post.details',$randomPost->slug)}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                        </ul>
+                                        <a class="cart" href="#">Add to Cart</a>
                                     </div>
-
-                                    <div class="middle-area">
-                                        <a class="name" href="#"><b>{{$comment->user->name}}</b></a>
-                                        <h6 class="date">on {{$comment->created_at->diffForHumans()}}</h6>
-                                    </div>
-
-                                    {{-- <div class="right-area">
-                                        <h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
-                                    </div> --}}
-
-                                </div><!-- post-info -->
-
-                                <p>{{$comment->comment}}</p>
-
+                                </div>
+                                <div class="why-text">
+                                    <h4>{{$randomPost->title}}</h4>
+                                    <h5>Rp. {{number_format($randomPost->harga, 2, ',', '.')}}</h5>
+                                </div>
                             </div>
-
-                        </div><!-- commnets-area -->
-                    @endforeach
-                {{-- <a class="more-comment-btn" href="#"><b>VIEW MORE COMMENTS</a> --}}
-                @else
-                    <div class="commnets-area">
-                        <div class="comment">
-                            <p>No comment yet. Be the first.</p>
                         </div>
-                    </div>
-                @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
 
+    </div>
+</div>
+<!-- End Cart -->
 
-            </div><!-- col-lg-8 col-md-12 -->
-
-        </div><!-- row -->
-
-    </div><!-- container -->
-</section>
 @endsection
 
 @push('js')

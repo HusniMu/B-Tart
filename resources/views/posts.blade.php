@@ -30,7 +30,7 @@
                         <img src="{{URL::asset('storage/post/'.$post->image)}}" class="img-fluid" alt="Image">
                         <div class="mask-icon">
                             <ul>
-                                <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                <li><a href="{{route('post.details',$post->slug)}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
                             </ul>
                             <a class="cart" href="#">Add to Cart</a>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="why-text">
                         <h4>{{$post->title}}</h4>
-                        <h5> Rp. {{$post->harga}}</h5>
+                        <h5>Rp. {{number_format($randomPost->harga, 2, ',', '.')}}</h5>
                     </div>
                 </div>
             </div>
