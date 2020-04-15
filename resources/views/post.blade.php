@@ -46,8 +46,52 @@
                             <ul>
                                 <li>
                                     <div class="form-group quantity-box">
+                                        <label class="control-label">Kategory</label>
+                                            @foreach ($post->categories as $category)
+                                            <p>{{$category->name}}</p>
+                                            @endforeach
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group quantity-box">
                                         <label class="control-label">Quantity</label>
                                         <input class="form-control" value="0" min="0" max="20" type="number">
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <div class="form-group quantity-box">
+                                        <label class="control-label">Rasa</label>
+                                            @foreach ($post->tags as $tag)
+                                            <span class="label bg-green">{{$tag->name}}</span>
+                                            @endforeach
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group quantity-box">
+                                        <label class="control-label">Topping</label>
+                                            @foreach ($post->toppings as $topping)
+                                            <span class="label bg-green">{{$topping->name}}</span>
+                                            @endforeach
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    <div class="form-group quantity-box">
+                                        <label class="control-label">Level</label>
+                                        @foreach ($post->levels as $level)
+                                        <span class="label bg-green">{{$level->name}}</span>
+                                        @endforeach
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group quantity-box">
+                                        <label class="control-label">Hiasan</label>
+                                            @foreach ($post->hiasans as $hiasan)
+                                            <span class="label bg-green">{{$hiasan->name}}</span>
+                                            @endforeach
                                     </div>
                                 </li>
                             </ul>
@@ -56,20 +100,7 @@
                                 <div class="cart-and-bay-btn">
                                     <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a>
                                     <a class="btn hvr-hover" data-fancybox-close="" href="#">Add to cart</a>
-                                </div>
-                            </div>
-
-                            <div class="add-to-btn">
-                                <div class="add-comp">
                                     <a class="btn hvr-hover" href="#"><i class="fas fa-heart"></i> Add to wishlist</a>
-                                    <a class="btn hvr-hover" href="#"><i class="fas fa-sync-alt"></i> Add to Compare</a>
-                                </div>
-                                <div class="share-bar">
-                                    <a class="btn hvr-hover" href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                                    <a class="btn hvr-hover" href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a>
-                                    <a class="btn hvr-hover" href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
-                                    <a class="btn hvr-hover" href="#"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a>
-                                    <a class="btn hvr-hover" href="#"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                 </div>
