@@ -62,7 +62,7 @@
                             <ul>
                                 <li>
                                     <div class="form-group quantity-box">
-                                        <label class="control-label">Rasa</label>
+                                        <label class="control-label">Rasa: </label>
                                             @foreach ($post->tags as $tag)
                                             <span class="label bg-green">{{$tag->name}}</span>
                                             @endforeach
@@ -70,7 +70,7 @@
                                 </li>
                                 <li>
                                     <div class="form-group quantity-box">
-                                        <label class="control-label">Topping</label>
+                                        <label class="control-label">Topping: </label>
                                             @foreach ($post->toppings as $topping)
                                             <span class="label bg-green">{{$topping->name}}</span>
                                             @endforeach
@@ -80,7 +80,7 @@
                             <ul>
                                 <li>
                                     <div class="form-group quantity-box">
-                                        <label class="control-label">Level</label>
+                                        <label class="control-label">Level: </label>
                                         @foreach ($post->levels as $level)
                                         <span class="label bg-green">{{$level->name}}</span>
                                         @endforeach
@@ -88,7 +88,7 @@
                                 </li>
                                 <li>
                                     <div class="form-group quantity-box">
-                                        <label class="control-label">Hiasan</label>
+                                        <label class="control-label">Hiasan: </label>
                                             @foreach ($post->hiasans as $hiasan)
                                             <span class="label bg-green">{{$hiasan->name}}</span>
                                             @endforeach
@@ -129,7 +129,11 @@
                                     </div>
                                 </div>
                                 <div class="why-text">
-                                    <h4>{{$randomPost->title}}</h4>
+                                    <h4>
+                                        <a href="{{route('post.details',$randomPost->slug)}}">
+                                            {{$randomPost->title}}
+                                        </a>
+                                    </h4>
                                     <h5>Rp. {{number_format($randomPost->harga, 2, ',', '.')}}</h5>
                                 </div>
                             </div>

@@ -21,7 +21,7 @@
     <div class="container">
         <div class="row special-list">
             @foreach ($posts as $post)
-            <div class="col-lg-3 col-md-6 special-grid">
+            <div class="col-lg-3 col-md-4 col-sm-6 special-grid">
                 <div class="products-single fix">
                     <div class="box-img-hover">
                         <div class="type-lb">
@@ -37,8 +37,12 @@
                         </div>
                     </div>
                     <div class="why-text">
-                        <h4>{{$post->title}}</h4>
-                        <h5>Rp. {{number_format($randomPost->harga, 2, ',', '.')}}</h5>
+                        <h4>
+                            <a href="{{route('post.details',$post->slug)}}">
+                                {{$post->title}}
+                            </a>
+                        </h4>
+                        <h5>Rp. {{number_format($post->harga, 2, ',', '.')}}</h5>
                     </div>
                 </div>
             </div>

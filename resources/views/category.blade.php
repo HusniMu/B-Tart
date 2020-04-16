@@ -55,7 +55,11 @@
                         </div>
                     </div>
                     <div class="why-text">
-                        <h4>{{$post->title}}</h4>
+                        <h4>
+                            <a href="{{route('post.details',$post->slug)}}">
+                                {{$post->title}}
+                            </a>
+                        </h4>
                         <h5> Rp. {{number_format($post->harga, 2, ',', '.')}}</h5>
                     </div>
                 </div>

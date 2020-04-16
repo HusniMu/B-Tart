@@ -18,58 +18,40 @@
 
 @section('content')
 
-<div class="slider display-table center-text">
-    <h1 class="title display-table-cell"><b>All Categories ({{$categories->count()}})</b></h1>
-</div><!-- slider -->
-
-<section class="blog-area section">
+<!-- Start All Title Box -->
+<div class="banner-img all-title-box">
     <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Semua Kategori ({{$categories->count()}})</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
 
+<!-- Start Categories  -->
+<div class="categories-shop">
+    <div class="container">
         <div class="row">
             @if ($categories->count()>0)
-            @foreach ($categories as $category)
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <div class="single-post post-style-1">
-
-                            <div class="blog-image"><img src="{{URL::asset('storage/category/slider/'.$category->image)}}"
-                                    alt="{{$category->title}}"></div>
-
-                            <div class="blog-info">
-                                <h4 class="title"><a href="{{route('category.posts',$category->slug)}}"><b>{{$category->name}}</b></a></h4>
-                                <ul class="post-footer">
-                                    <li  style="width:100%;" title="Total posts {{$category->posts->count()}}">
-                                        <a href="javascript:void()0;">
-                                        <i class="ion-ios-albums"></i>
-                                            {{$category->posts->count()}}
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div><!-- blog-info -->
-                        </div><!-- single-post -->
-                    </div><!-- card -->
-                </div><!-- col-lg-4 col-md-6 -->
-            @endforeach
-            @else
-                <div class="col-lg-12 col-md-12">
-                    <div class="card h-100">
-                        <div class="single-post post-style-1">
-                            <div class="blog-info">
-                                <h4 class="title">
-                                    <strong>
-                                        <h3>Sorry, No categories found</h3>
-                                    </strong>
-                                </h4>
-                            </div>
-                        </div>
+                @foreach ($categories as $category)
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="shop-cat-box">
+                    <img class="img-fluid" src="{{URL::asset('storage/category/slider/'.$category->image)}}" alt="{{$category->name}}" />
+                        <a class="btn hvr-hover" href="{{route('category.posts',$category->slug)}}">{{$category->name}}</a>
                     </div>
                 </div>
+                @endforeach
+            @else
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <h3>Tidak ada kategori yang tersedia</h3>
+                </div>
             @endif
-
-        </div><!-- row -->
-
-    </div><!-- container -->
-</section><!-- section -->
+        </div>
+    </div>
+</div>
+<!-- End Categories -->
 
 @endsection
 
