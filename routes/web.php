@@ -27,6 +27,10 @@ Route::get('category/{slug}','PostController@postByCategory')->name('category.po
 
 Route::get('tag/{slug}','PostController@postByTag')->name('tag.posts');
 
+Route::get('topping/{slug}','PostController@postByTopping')->name('topping.posts');
+Route::get('level/{slug}','PostController@postByLevel')->name('level.posts');
+Route::get('hiasan/{slug}','PostController@postByHiasan')->name('hiasan.posts');
+
 Route::get('profile/{username}', 'AuthorController@profile')->name('author.profile');
 
 Route::post('subscriber', 'SubscriberController@store')->name('subscriber.store');

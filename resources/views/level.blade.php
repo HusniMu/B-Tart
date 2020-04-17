@@ -1,7 +1,7 @@
 @extends('layout.frontend.main')
 
 
-@section('title', $tag->name)
+@section('title', $level->name)
 
 @push('css')
 @endpush
@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h2>Semua Rasa {{$tag->name}} ({{$posts->count()}})</h2>
+                <h2>Semua Tingkat {{$level->name}} ({{$posts->count()}})</h2>
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
                 @endforeach
             @else
                 <div class="col-lg-12 col-md-12 special-grid">
-                    <h3>Maaf, tidak ada produk pada tag ini</h3>
+                    <h3>Maaf, tidak ada produk pada level ini</h3>
                 </div>
             @endif
         </div>

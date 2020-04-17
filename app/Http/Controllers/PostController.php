@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Tag;
 use App\Post;
 use App\Category;
+use App\Hiasan;
+use App\Level;
+use App\Topping;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -48,6 +51,27 @@ class PostController extends Controller
         $posts = Tag::where('slug',$slug)->first()->posts->where('status',true);
         $tag = Tag::where('slug',$slug)->first();
         return view('tag',compact('tag','posts'));
+    }
+
+    public function postByTopping($slug)
+    {
+        $posts = Topping::where('slug',$slug)->first()->posts->where('status',true);
+        $topping = Topping::where('slug',$slug)->first();
+        return view('topping',compact('topping','posts'));
+    }
+
+    public function postByLevel($slug)
+    {
+        $posts = Level::where('slug',$slug)->first()->posts->where('status',true);
+        $level = Level::where('slug',$slug)->first();
+        return view('level',compact('level','posts'));
+    }
+
+    public function postByHiasan($slug)
+    {
+        $posts = Hiasan::where('slug',$slug)->first()->posts->where('status',true);
+        $hiasan = Hiasan::where('slug',$slug)->first();
+        return view('hiasan',compact('hiasan','posts'));
     }
 
     public function category()

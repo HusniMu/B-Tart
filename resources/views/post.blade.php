@@ -64,7 +64,11 @@
                                     <div class="form-group quantity-box">
                                         <label class="control-label">Rasa: </label>
                                             @foreach ($post->tags as $tag)
-                                            <span class="label bg-green">{{$tag->name}}</span>
+                                            <span class="label bg-green">
+                                                <a href="{{route('tag.posts',$tag->slug)}}">
+                                                    {{$tag->name}}
+                                                </a>
+                                            </span>
                                             @endforeach
                                     </div>
                                 </li>
@@ -72,7 +76,11 @@
                                     <div class="form-group quantity-box">
                                         <label class="control-label">Topping: </label>
                                             @foreach ($post->toppings as $topping)
-                                            <span class="label bg-green">{{$topping->name}}</span>
+                                            <span class="label bg-green">
+                                                <a href="{{route('topping.posts',$topping->slug)}}">
+                                                    {{$topping->name}}
+                                                </a>
+                                            </span>
                                             @endforeach
                                     </div>
                                 </li>
@@ -82,7 +90,11 @@
                                     <div class="form-group quantity-box">
                                         <label class="control-label">Level: </label>
                                         @foreach ($post->levels as $level)
-                                        <span class="label bg-green">{{$level->name}}</span>
+                                        <span class="label bg-green">
+                                            <a href="{{route('level.posts',$level->slug)}}">
+                                                {{$level->name}}
+                                            </a>
+                                        </span>
                                         @endforeach
                                     </div>
                                 </li>
@@ -90,7 +102,11 @@
                                     <div class="form-group quantity-box">
                                         <label class="control-label">Hiasan: </label>
                                             @foreach ($post->hiasans as $hiasan)
-                                            <span class="label bg-green">{{$hiasan->name}}</span>
+                                            <span class="label bg-green">
+                                                <a href="{{route('hiasan.posts',$hiasan->slug)}}">
+                                                    {{$hiasan->name}}
+                                                </a>
+                                            </span>
                                             @endforeach
                                     </div>
                                 </li>
