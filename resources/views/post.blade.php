@@ -2,6 +2,11 @@
 
 
 @section('title',$post->title)
+
+@push('css')
+
+@endpush
+
 @section('content')
 
 <!-- Start Shop Detail  -->
@@ -44,6 +49,10 @@
                         <p>
                             <h4>Description:</h4>
                             <p>{!!$post->body!!}</p>
+                            <strong>Note:</strong>
+                            @foreach ($post->categories as $category)
+                                <p>{!!$category->body!!}</p>
+                            @endforeach
                             <ul>
                                 <li>
                                     <div class="form-group quantity-box">

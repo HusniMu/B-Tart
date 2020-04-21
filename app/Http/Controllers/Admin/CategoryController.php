@@ -43,7 +43,8 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:1|unique:categories',
-            'image' => 'required|mimes:jpeg,bmp,png,jpg'
+            'image' => 'required|mimes:jpeg,bmp,png,jpg',
+            'body' => 'nullable'
         ]);
         // get form image
         $image = $request->file('image');
@@ -76,6 +77,7 @@ class CategoryController extends Controller
         $category->name = "Kue ".ucwords($request->name);
         $category->slug = $slug;
         $category->image = $imageName;
+        $category->body = $request->body;
         $category->save();
         Toastr::success('Category Successfully Saved', 'Success');
         return redirect()->back();
@@ -115,7 +117,8 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:1|unique:categories',
-            'image' => 'mimes:jpeg,bmp,png,jpg'
+            'image' => 'mimes:jpeg,bmp,png,jpg',
+            'body' => 'nullable'
         ]);
         // get form image
         $image = $request->file('image');
@@ -158,6 +161,7 @@ class CategoryController extends Controller
         $category->name = "Kue ".ucwords($request->name);
         $category->slug = $slug;
         $category->image = $imageName;
+        $category->body = $request->body;
         $category->save();
         Toastr::success('Category Successfully Updated', 'Success');
         return redirect()->route('admin.category.index');

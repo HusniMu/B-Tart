@@ -34,6 +34,13 @@
                             <input type="file" name="image" id="image" autofocus>
                         </div>
 
+                        <div class="form-group">
+                            <label class="form-label" for="body">Detail</label>
+                            <textarea id="ckeditor" name="body" id="body">
+                                {!!old('body')!!}
+                            </textarea>
+                        </div>
+
                         <a href="{{route('admin.category.index')}}" class="btn btn-danger m-t-15 waves-effect">Back</a>
                         <button type="submit" class="btn btn-primary m-t-15 waves-effect" autofocus>Submit</button>
                     </form>
@@ -46,5 +53,33 @@
 
 
 @push('js')
+<!-- Ckeditor -->
+<script src="{{asset('assets/backend/plugins/ckeditor/ckeditor.js')}}"></script>
 
+{{-- <script src="{{asset('assets/backend/js/pages/forms/editors.js')}}"></script> --}}
+<script>
+    $(function () {
+    //CKEditor
+    CKEDITOR.replace('ckeditor');
+    CKEDITOR.config.height = 150;
+    CKEDITOR.on('dialogDefinition', function (ev) {
+        var dialogName = ev.data.name,
+            dialogDefinition = ev.data.definition;
+
+        if (dialogName == 'image') {
+            var onOk = dialogDefinition.onOk;
+
+            dialogDefinition.onOk = function (e) {
+                var width = this.getContentElement('info', 'txtWidth');
+                width.setValue('100%');//Set Default Width
+
+                var height = this.getContentElement('info', 'txtHeight');
+                height.setValue('auto');//Set Default height
+
+                onOk && onOk.apply(this, e);
+            };
+        }
+        });
+});
+</script>
 @endpush
