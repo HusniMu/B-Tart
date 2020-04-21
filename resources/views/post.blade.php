@@ -7,6 +7,7 @@
 <!-- Start Shop Detail  -->
 <div class="shop-detail-box-main">
     <div class="container">
+        {{-- detail produk --}}
         <div class="row">
             <div class="col-xl-5 col-lg-5 col-md-6">
                 <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
@@ -63,6 +64,7 @@
                                 <li>
                                     <div class="form-group quantity-box">
                                         <label class="control-label">Rasa: </label>
+                                            @if ($post->tags->count()>0)
                                             @foreach ($post->tags as $tag)
                                             <span class="label bg-green">
                                                 <a href="{{route('tag.posts',$tag->slug)}}">
@@ -70,18 +72,29 @@
                                                 </a>
                                             </span>
                                             @endforeach
+                                            @else
+                                            <span class="label bg-green">
+                                                tidak ada
+                                            </span>
+                                            @endif
                                     </div>
                                 </li>
                                 <li>
                                     <div class="form-group quantity-box">
                                         <label class="control-label">Topping: </label>
-                                            @foreach ($post->toppings as $topping)
-                                            <span class="label bg-green">
-                                                <a href="{{route('topping.posts',$topping->slug)}}">
-                                                    {{$topping->name}}
-                                                </a>
-                                            </span>
-                                            @endforeach
+                                        @if ($post->toppings->count()>0)
+                                        @foreach ($post->toppings as $topping)
+                                        <span class="label bg-green">
+                                            <a href="{{route('topping.posts',$topping->slug)}}">
+                                                {{$topping->name}}
+                                            </a>
+                                        </span>
+                                        @endforeach
+                                        @else
+                                        <span class="label bg-green">
+                                            tidak ada
+                                        </span>
+                                        @endif
                                     </div>
                                 </li>
                             </ul>
@@ -89,25 +102,37 @@
                                 <li>
                                     <div class="form-group quantity-box">
                                         <label class="control-label">Level: </label>
-                                        @foreach ($post->levels as $level)
-                                        <span class="label bg-green">
-                                            <a href="{{route('level.posts',$level->slug)}}">
-                                                {{$level->name}}
-                                            </a>
-                                        </span>
-                                        @endforeach
+                                        @if ($post->levels->count()>0)
+                                            @foreach ($post->levels as $level)
+                                            <span class="label bg-green">
+                                                <a href="{{route('level.posts',$level->slug)}}">
+                                                    {{$level->name}}
+                                                </a>
+                                            </span>
+                                            @endforeach
+                                            @else
+                                            <span class="label bg-green">
+                                                tidak ada
+                                            </span>
+                                            @endif
                                     </div>
                                 </li>
                                 <li>
                                     <div class="form-group quantity-box">
                                         <label class="control-label">Hiasan: </label>
-                                            @foreach ($post->hiasans as $hiasan)
-                                            <span class="label bg-green">
-                                                <a href="{{route('hiasan.posts',$hiasan->slug)}}">
-                                                    {{$hiasan->name}}
-                                                </a>
-                                            </span>
-                                            @endforeach
+                                        @if ($post->hiasans->count()>0)
+                                        @foreach ($post->hiasans as $hiasan)
+                                        <span class="label bg-green">
+                                            <a href="{{route('hiasan.posts',$hiasan->slug)}}">
+                                                {{$hiasan->name}}
+                                            </a>
+                                        </span>
+                                        @endforeach
+                                        @else
+                                        <span class="label bg-green">
+                                            tidak ada
+                                        </span>
+                                        @endif
                                     </div>
                                 </li>
                             </ul>
@@ -122,6 +147,7 @@
                 </div>
             </div>
         </div>
+        {{-- end detail produk --}}
 
         {{-- featured product --}}
         <div class="row my-5">
@@ -158,6 +184,7 @@
                 </div>
             </div>
         </div>
+        {{-- featured produk --}}
 
     </div>
 </div>

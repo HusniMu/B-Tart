@@ -26,7 +26,7 @@
         <div class="row special-list">
             @if ($posts->count()>0)
                 @foreach ($posts as $post)
-                <div class="col-lg-3 col-md-6 special-grid">
+                <div class="col-lg-3 col-md-4 col-sm-6 special-grid">
                     <div class="products-single fix">
                         <div class="box-img-hover">
                             <div class="type-lb">

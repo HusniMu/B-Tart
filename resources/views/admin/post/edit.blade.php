@@ -37,6 +37,22 @@
                             <input type="file" name="image" id="image" autofocus value="{{$post->image}}">
                         </div>
 
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="number" id="lama" name="lama" class="form-control" value="{{$post->lama}}"
+                                    autofocus autocomplete="off">
+                                <label class="form-label" for="lama">Durasi sebelum dikirim</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="number" id="stok" name="stok" class="form-control" value="{{$post->stok}}"
+                                    autofocus autocomplete="off">
+                                <label class="form-label" for="stok">Stok Kue</label>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <input type="checkbox" name="status" id="publish" class="filled-in" value="1"
                                 {{$post->status==true ? 'checked':''}}>
@@ -152,7 +168,7 @@
                         <div class="form-group form-float">
                             <div class="form-line">
                                 <input type="number" id="harga" name="harga" class="form-control" placeholder="{{$post->harga}}"
-                                    autofocus autocomplete="off">
+                                    autofocus autocomplete="off" disabled>
                                 <label class="form-label" for="harga">Harga</label>
                             </div>
                         </div>

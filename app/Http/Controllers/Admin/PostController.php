@@ -58,12 +58,14 @@ class PostController extends Controller
         $this->validate($request, [
             'title' => 'required|min:2',
             'image' => 'required|mimes:jpeg,bmp,png,jpg',
-            'harga' => 'nullable',
+            'harga' => 'nullable|numeric',
             'category' => 'required',
             'tags' => 'required',
             'toppings' => 'required',
-            'level' => 'required',
-            'body' => 'required'
+            'level' => 'required|numeric',
+            'body' => 'required',
+            'lama' => 'required|numeric',
+            'stok' => 'nullable|numeric'
         ]);
         $image = $request->file('image');
         $currentDate = Carbon::now()->toDateString();
@@ -89,10 +91,23 @@ class PostController extends Controller
         $post->harga = $request->harga;
         $post->image = $imageName;
         $post->body = $request->body;
-        if (isset($request->status)) {
-            $post->status = true;
+        // if (isset($request->status)) {
+        //     $post->status = true;
+        // } else {
+        //     $post->status = false;
+        // }
+        $post->lama = $request->lama;
+        $post->stok = $request->stok;
+        if($post->stok == 0){
+            if(!isset($request->status) || isset($request->status)){
+                $post->status = false;
+            }
         } else {
-            $post->status = false;
+            if(isset($request->status)){
+                $post->status = true;
+            } else{
+                $post->status = false;
+            }
         }
         $post->save();
 
@@ -173,12 +188,14 @@ class PostController extends Controller
         $this->validate($request, [
             'title' => 'required|min:2',
             'image' => 'mimes:jpeg,bmp,png,jpg',
-            'harga' => 'nullable',
+            'harga' => 'nullable|numeric',
             'category' => 'required',
             'tags' => 'required',
             'toppings' => 'required',
             'level' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'lama' => 'required|numeric',
+            'stok' => 'nullable|numeric'
         ]);
         $image = $request->file('image');
         $currentDate = Carbon::now()->toDateString();
@@ -207,10 +224,23 @@ class PostController extends Controller
         $post->image = $imageName;
         $post->body = $request->body;
         $post->harga = $request->harga;
-        if (isset($request->status)) {
-            $post->status = true;
+        // if (isset($request->status)) {
+        //     $post->status = true;
+        // } else {
+        //     $post->status = false;
+        // }
+        $post->lama = $request->lama;
+        $post->stok = $request->stok;
+        if($post->stok == 0){
+            if(!isset($request->status) || isset($request->status)){
+                $post->status = false;
+            }
         } else {
-            $post->status = false;
+            if(isset($request->status)){
+                $post->status = true;
+            } else{
+                $post->status = false;
+            }
         }
         $post->save();
 

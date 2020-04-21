@@ -17,6 +17,12 @@
         padding: 70px 0px;
         position: relative;
     }
+
+    .product-card{
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+    }
 </style>
 @endpush
 
@@ -40,13 +46,13 @@
         <div class="row special-list">
             @if ($posts->count()>0)
                 @foreach ($posts as $post)
-                <div class="col-lg-3 col-md-6 special-grid">
+                <div class="col-lg-3 col-md-4 col-sm-6 special-grid">
                     <div class="products-single fix">
                         <div class="box-img-hover">
                             <div class="type-lb">
                                 <p class="sale">Sale</p>
                             </div>
-                            <img src="{{URL::asset('storage/post/'.$post->image)}}" class="img-fluid" alt="Image">
+                            <img src="{{URL::asset('storage/post/'.$post->image)}}" class="img-fluid product-card" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="{{route('post.details',$post->slug)}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
