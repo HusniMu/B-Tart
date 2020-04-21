@@ -19,7 +19,7 @@
     }
 
     .product-card{
-        height: 200px;
+        height: 250px;
         object-fit: cover;
         object-position: center;
     }

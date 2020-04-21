@@ -4,6 +4,13 @@
 @section('title', $hiasan->name)
 
 @push('css')
+<style>
+    .product-card{
+        height: 250px;
+        object-fit: cover;
+        object-position: center;
+    }
+</style>
 @endpush
 
 @section('content')
@@ -32,7 +39,7 @@
                             <div class="type-lb">
                                 <p class="sale">Sale</p>
                             </div>
-                            <img src="{{URL::asset('storage/post/'.$post->image)}}" class="img-fluid" alt="Image">
+                            <img src="{{URL::asset('storage/post/'.$post->image)}}" class="img-fluid product-card" alt="Image">
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="{{route('post.details',$post->slug)}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>

@@ -244,7 +244,7 @@ class PostController extends Controller
         }
         $post->save();
 
-        $post->categories()->sync($request->categories);
+        $post->categories()->sync($request->category);
         $post->tags()->sync($request->tags);
         $post->toppings()->sync($request->toppings);
         $post->hiasans()->sync($request->hiasans);

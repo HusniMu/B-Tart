@@ -82,6 +82,15 @@
                                         {{$postCategory->id == $category->id ? 'selected':''}}
                                         @endforeach
                                         value="{{$category->id}}">{{$category->name}}</option>
+                                        {{-- @foreach ($post->categories as $postCategory)
+                                            @if($postCategory->id == $category->id)
+                                                <option value="{{$category->id}}" selected>{{$category->name}}</option>
+                                            @elseif($post->category == null)
+                                                <option value="null" selected disabled>---</option>
+                                            @else
+                                                <option value="{{$category->id}}" selected>{{$category->name}}</option>
+                                            @endif
+                                        @endforeach --}}
                                     @endforeach
                                 </select>
                             </div>

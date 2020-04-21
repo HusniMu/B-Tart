@@ -40,7 +40,7 @@
                 <div class="single-product-details">
                     <h2>{{$post->title}}</h2>
                     <h5>Rp. {{number_format($post->harga, 2, ',', '.')}}</h5>
-                    <p class="available-stock"><span> Waktu pembuatan --:--:--</span>
+                    <p class="available-stock"><span> Minimal waktu pemesanan : {{$post->lama}} <strong>hari</strong></span>
                         <p>
                             <h4>Description:</h4>
                             <p>{!!$post->body!!}</p>
@@ -56,7 +56,7 @@
                                 <li>
                                     <div class="form-group quantity-box">
                                         <label class="control-label">Quantity</label>
-                                        <input class="form-control" value="0" min="0" max="20" type="number">
+                                        <input class="form-control" value="0" min="0" max="{{$post->stok}}" type="number">
                                     </div>
                                 </li>
                             </ul>
