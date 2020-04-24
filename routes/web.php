@@ -11,16 +11,23 @@
 |
 */
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CustomOrderController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // })->name('home');
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('about-us', 'HomeController@about')->name('about-us');
+Route::get('how-to', 'HomeController@howto')->name('how-to');
+Route::get('faq', 'HomeController@faq')->name('faq');
+Route::get('contact-us', 'HomeController@contact')->name('contact-us');
 
 Route::get('posts', 'PostController@index')->name('post.index');
 Route::get('post/{slug}', 'PostController@details')->name('post.details');
+
+Route::get('customOrder', 'CustomOrderController@index')->name('customOrder');
 
 Route::get('categories','PostController@category')->name('categories');
 Route::get('category/{slug}','PostController@postByCategory')->name('category.posts');

@@ -37,7 +37,8 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item active"><a class="nav-link" href="{{route('home')}}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('about-us')}}">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('customOrder')}}">Custom Order</a></li>
                     <li class="dropdown">
                         <a href="javascript:void()0;" class="nav-link dropdown-toggle" data-toggle="dropdown">Produk</a>
                         <ul class="dropdown-menu">
@@ -45,8 +46,9 @@
                             <li><a href="/posts">Semua Produk</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="service.html">Our Service</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('how-to')}}">How To</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('faq')}}">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('contact-us')}}">Contact Us</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

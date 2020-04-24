@@ -1,9 +1,10 @@
 @extends('layout.frontend.main')
 
 
-@section('title',$post->title)
+@section('title', "Make your's own desired cake")
 
 @push('css')
+<link href="{{asset('assets/backend/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
 <style>
     .product-card{
         height: 100%;
@@ -23,126 +24,113 @@
             <div class="col-xl-5 col-lg-5 col-md-6">
                 <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active"> <img class="d-block w-100 product-card" src="{{URL::asset('storage/post/'.$post->image)}}" alt="First slide"> </div>
+                        <div class="carousel-item active"> <img class="d-block w-100 product-card" src="default.png" alt="First slide"> </div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-7 col-lg-7 col-md-6">
                 <div class="single-product-details">
-                    <h2>{{$post->title}}</h2>
-                    <h5>Rp. {{number_format($post->harga, 2, ',', '.')}}</h5>
-                    <p class="available-stock"><span> Minimal waktu pemesanan : {{$post->lama}} <strong>hari</strong></span>
+                    <h2>Custom Cake</h2>
+                    {{-- <h5>Rp. {{number_format($post->harga, 2, ',', '.')}}</h5> --}}
+                    <p class="available-stock"><span> Minimal waktu pemesanan : {{$lama}} <strong>hari</strong></span>
                         <p>
-                            <h4>Description:</h4>
-                            <p>{!!$post->body!!}</p>
-                            <strong>Note:</strong>
-                            @foreach ($post->categories as $category)
-                                <p>{!!$category->body!!}</p>
-                            @endforeach
                             <ul>
                                 <li>
                                     <div class="form-group quantity-box">
-                                        <label class="control-label">Kategory</label>
-                                            @foreach ($post->categories as $category)
-                                            <p>{{$category->name}}</p>
+                                        <label for="category" class="control-label">Select Kategori</label>
+                                        <select class="form-control show-tick" id="category" name="category"
+                                            data-live-search="true">
+                                            <option value="tidak ada" selected disabled>---</option>
+                                            @foreach ($categories as $category)
+                                            <option value="{{$category->id}}">{{$category->name}}</option>
                                             @endforeach
+                                        </select>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="form-group quantity-box">
                                         <label class="control-label" for="jumlah">Quantity</label>
-                                        <input class="form-control" value="0" min="0" max="{{$post->stok}}" type="number" id="jumlah" name="jumlah">
+                                        <input class="form-control" value="0" min="0" max="10" type="number" id="jumlah" name="jumlah">
                                     </div>
                                 </li>
                             </ul>
                             <ul>
                                 <li>
                                     <div class="form-group quantity-box">
-                                        <label class="control-label">Rasa: </label>
-                                            @if ($post->tags->count()>0)
-                                            @foreach ($post->tags as $tag)
-                                            <span class="label bg-green">
-                                                <a href="{{route('tag.posts',$tag->slug)}}">
-                                                    {{$tag->name}}
-                                                </a>
-                                            </span>
+                                        <label for="tag" class="control-label">Select Rasa</label>
+                                        <select class="form-control show-tick" id="tag" name="tag"
+                                            data-live-search="true">
+                                            <option value="tidak ada" selected disabled>---</option>
+                                            @foreach ($tags as $tag)
+                                            <option value="{{$tag->id}}">{{$tag->name}}</option>
                                             @endforeach
-                                            @else
-                                            <span class="label bg-green">
-                                                tidak ada
-                                            </span>
-                                            @endif
+                                        </select>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="form-group quantity-box">
-                                        <label class="control-label">Topping: </label>
-                                        @if ($post->toppings->count()>0)
-                                        @foreach ($post->toppings as $topping)
-                                        <span class="label bg-green">
-                                            <a href="{{route('topping.posts',$topping->slug)}}">
-                                                {{$topping->name}}
-                                            </a>
-                                        </span>
-                                        @endforeach
-                                        @else
-                                        <span class="label bg-green">
-                                            tidak ada
-                                        </span>
-                                        @endif
+                                        <label for="topping" class="control-label">Select Topping</label>
+                                        <select class="form-control show-tick" id="topping" name="topping"
+                                            data-live-search="true">
+                                            <option value="tidak ada" selected disabled>---</option>
+                                            @foreach ($toppings as $topping)
+                                            <option value="{{$topping->id}}">{{$topping->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </li>
                             </ul>
                             <ul>
                                 <li>
                                     <div class="form-group quantity-box">
-                                        <label class="control-label">Level: </label>
-                                        @if ($post->levels->count()>0)
-                                            @foreach ($post->levels as $level)
-                                            <span class="label bg-green">
-                                                <a href="{{route('level.posts',$level->slug)}}">
-                                                    {{$level->name}}
-                                                </a>
-                                            </span>
+                                        <label for="level" class="control-label">Select Level</label>
+                                        <select class="form-control show-tick" id="level" name="level"
+                                            data-live-search="true">
+                                            <option value="tidak ada" selected disabled>---</option>
+                                            @foreach ($levels as $level)
+                                            <option value="{{$level->id}}">{{$level->name}}</option>
                                             @endforeach
-                                            @else
-                                            <span class="label bg-green">
-                                                tidak ada
-                                            </span>
-                                            @endif
+                                        </select>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="form-group quantity-box">
-                                        <label class="control-label">Hiasan: </label>
-                                        @if ($post->hiasans->count()>0)
-                                        @foreach ($post->hiasans as $hiasan)
-                                        <span class="label bg-green">
-                                            <a href="{{route('hiasan.posts',$hiasan->slug)}}">
-                                                {{$hiasan->name}}
-                                            </a>
-                                        </span>
-                                        @endforeach
-                                        @else
-                                        <span class="label bg-green">
-                                            tidak ada
-                                        </span>
-                                        @endif
+                                        <label for="hiasan" class="control-label">Select Hiasan</label>
+                                        <select class="form-control show-tick" id="hiasan" name="hiasan"
+                                            data-live-search="true">
+                                            <option value="tidak ada" selected disabled>---</option>
+                                            @foreach ($hiasans as $hiasan)
+                                            <option value="{{$hiasan->id}}">{{$hiasan->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </li>
                             </ul>
-
+                            <ul>
+                                <li>
+                                    <div class="form-group quantity-box">
+                                        <label class="mx-2 control-label" for="note">Note</label>
+                                        <textarea class="form-control" id="note" name="note" placeholder="Note" rows="4">{{old('note')}}</textarea>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group quantity-box">
+                                        <label class="control-label" for="bentuk">Bentuk</label>
+                                        <input type="file" name="bentuk" id="bentuk">
+                                    </div>
+                                </li>
+                            </ul>
                             <div class="form-group quantity-box">
                                 <label class="control-label" for="tgl_pengiriman">Tanggal pengiriman</label>
-                                <input class="form-control" type="date" id="tgl_pengiriman" name="tgl_pengiriman" min="{{$tgl_sekarang.'-'.($tgl_tambah+$post->lama)}}">
+                                <input class="form-control" type="date" id="tgl_pengiriman" name="tgl_pengiriman" min="{{$tgl_sekarang.'-'.($tgl_tambah+$lama)}}">
                             </div>
+
 
 
                             <div class="price-box-bar">
                                 <div class="cart-and-bay-btn">
                                     <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a>
                                     <a class="btn hvr-hover" data-fancybox-close="" href="#">Add to cart</a>
-                                    <a class="btn hvr-hover" href="#"><i class="fas fa-heart"></i> Add to wishlist</a>
                                 </div>
                             </div>
                         </p>
@@ -195,5 +183,5 @@
 @endsection
 
 @push('js')
-
+<script src="{{asset('assets/backend/plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
 @endpush

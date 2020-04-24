@@ -8,6 +8,7 @@ use App\Category;
 use App\Hiasan;
 use App\Level;
 use App\Topping;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -33,10 +34,12 @@ class PostController extends Controller
             Session::put($blogKey, 1);
         }
 
+        $tgl_sekarang = Carbon::now()->format('Y-m');
+        $tgl_tambah = Carbon::now()->format('d');
         $randomPosts = Post::where('slug','!=',$slug)
                     ->published()
                     ->take(4)->inRandomOrder()->get();
-        return view('post', compact('post', 'randomPosts'));
+        return view('post', compact('post', 'randomPosts','tgl_sekarang','tgl_tambah'));
     }
 
     public function postByCategory($slug)

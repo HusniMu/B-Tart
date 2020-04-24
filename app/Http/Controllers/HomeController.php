@@ -14,10 +14,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth')->except('index');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth')->except('index');
+    // }
 
     /**
      * Show the application dashboard.
@@ -34,5 +34,25 @@ class HomeController extends Controller
         //     ->take(6)
         //     ->get();
         return view('welcome', compact('categories', 'banners'));
+    }
+
+    public function about()
+    {
+        return view('about-us');
+    }
+
+    public function howto()
+    {
+        return view('how-to');
+    }
+
+    public function faq()
+    {
+        return view('faq');
+    }
+
+    public function contact()
+    {
+        return view('contact-us');
     }
 }
