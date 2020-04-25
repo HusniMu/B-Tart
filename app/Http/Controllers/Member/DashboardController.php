@@ -12,8 +12,8 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $comments = Comment::where('user_id', Auth::user()->id)->get();
-        $favorites = $user->favorite_posts;
-        return view('member.dashboard',compact('comments','favorites'));
+        // $comments = Comment::where('user_id', Auth::user()->id)->get();
+        // $favorites = $user->favorite_posts;
+        return view('member.dashboard');
     }
 }

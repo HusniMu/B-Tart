@@ -41,7 +41,7 @@
                     <div class="contact-form-right">
                         <h2>GET IN TOUCH</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed odio justo, ultrices ac nisl sed, lobortis porta elit. Fusce in metus ac ex venenatis ultricies at cursus mauris.</p>
-                        <form id="contactForm">
+                        <form id="contactForm" action="mailto:husni060300@gmail.com" method="post" enctype="text/plain">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">

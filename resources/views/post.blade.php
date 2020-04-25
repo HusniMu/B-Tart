@@ -10,6 +10,10 @@
         object-fit: cover;
         object-position: center;
     }
+
+    .favorite_posts{
+        color:blue;
+    }
 </style>
 @endpush
 
@@ -143,6 +147,24 @@
                                     <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a>
                                     <a class="btn hvr-hover" data-fancybox-close="" href="#">Add to cart</a>
                                     <a class="btn hvr-hover" href="#"><i class="fas fa-heart"></i> Add to wishlist</a>
+
+                                    @guest
+                                    <a href="javascript:void()0;" onclick="toastr.info('To add wishlist. You neew to login first!.','Info'),{
+                                        closeButton: true,
+                                        progressBar: true,
+                                    }" class="btn btn-hover">
+                                        <i class="fas fa-heart"></i>
+                                        {{$post->favorite_to_users->count()}} Add to wishlist
+                                    </a>
+                                    @else
+                                    <a href="javascript:void()0;" onclick="document.getElementById('favorite-form-{{$post->id}}').submit();" class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$post->id)->count()==0? 'favorite_posts':''}} btn btn-hover">
+                                        <i class="fas fa-heart"></i>
+                                        {{$post->favorite_to_users->count()}} Add to wishlist
+                                    </a>
+                                    <form action="{{route('post.favorite',$post->id)}}" id="favorite-form-{{$post->id}}" method="post" style="display:none;">
+                                        @csrf
+                                    </form>
+                                    @endguest
                                 </div>
                             </div>
                         </p>

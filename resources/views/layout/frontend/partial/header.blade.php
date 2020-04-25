@@ -8,9 +8,43 @@
                 </div>
                 <div class="our-link">
                     <ul>
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Our location</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        @guest
+                        <li>
+                            <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                            @if (Route::has('register'))
+                            <li>
+                                <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                            @endif
+                        @else
+                        <li class="dropdown">
+                            <a href="javascript:void()0;" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                            <ul class="dropdown-menu">
+                                @if(Auth::user()->role_id == 1)
+                                <li>
+                                    <a href="{{route('admin.dashboard')}}">
+                                        {{ Auth::user()->name }} <strong>Profile</strong>
+                                    </a>
+                                </li>
+                                @elseif(Auth::user()->role_id == 2)
+                                <li>
+                                    <a href="{{route('member.dashboard')}}">
+                                        {{ Auth::user()->name }} <strong>Profile</strong>
+                                    </a>
+                                </li>
+                                @endif
+                                <li>
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        @endguest
                     </ul>
                 </div>
             </div>

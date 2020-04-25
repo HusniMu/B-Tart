@@ -1,94 +1,86 @@
 @extends('layout.frontend.main')
 
 
-@section('title','Member Dashboard')
-
-
-@push('css')
-<link href="{{asset('assets/frontend/css/member/styles.css')}}" rel="stylesheet">
-<link href="{{asset('assets/frontend/css/member/responsive.css')}}" rel="stylesheet">
-@endpush
-
-
+@section('title',Auth::user()->name." Dashboard")
 @section('content')
 
-<section class="blog-area section">
+<!-- Start All Title Box -->
+<div class="all-title-box">
     <div class="container">
-
         <div class="row">
-
-            @include('member.sidebar')
-
-            <div class="col-lg-8 col-md-12">
-                <div class="single-post info-area ">
-
-                    <div class="about-area">
-                        <h4 class="title"><b>MEMBER COMMENTS HISTORY</b></h4>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        #
-                                    </th>
-                                    <th>
-                                        comment
-                                    </th>
-                                    <th>
-                                        post
-                                    </th>
-                                    <th>
-                                        at
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($comments as $key=>$comment)
-                                    <tr>
-                                        <td>{{$key+1}}</td>
-                                        <td>{{$comment->comment}}</td>
-                                        <td>
-                                            <a href="{{route('post.details',$comment->post->slug)}}">
-                                                {{$comment->post->title}}
-                                            </a>
-                                        </td>
-                                        <td>{{$comment->created_at->diffForHumans()}}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <h4 class="title"><b>MEMBER FAVORITE HISTORY</b></h4>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>liked post</th>
-                                    <th>at</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($favorites as $key=>$favorite)
-                                    <tr>
-                                        <td>{{$key+1}}</td>
-                                        <td>
-                                            <a href="{{route('post.details',$favorite->slug)}}">
-                                                {{$favorite->title}}
-                                            </a>
-                                        </td>
-                                        <td>{{$favorite->created_at->diffForHumans()}}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="col-lg-12">
+                <h2>CONTACT US</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
 
 
-                </div><!-- info-area -->
-            </div><!-- col-lg-8 col-md-12 -->
-
-        </div><!-- row -->
-
-    </div><!-- container -->
-</section><!-- section -->
+<!-- Start Contact Us  -->
+<div class="contact-box-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12">
+                <div class="contact-info-left">
+                    <h2>CONTACT INFO</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent urna diam, maximus ut ullamcorper quis, placerat id eros. Duis semper justo sed condimentum rutrum. Nunc tristique purus turpis. Maecenas vulputate. </p>
+                    <ul>
+                        <li>
+                            <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
+                        </li>
+                        <li>
+                            <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
+                        </li>
+                        <li>
+                            <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-8 col-sm-12">
+                <div class="contact-form-right">
+                    <h2>GET IN TOUCH</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed odio justo, ultrices ac nisl sed, lobortis porta elit. Fusce in metus ac ex venenatis ultricies at cursus mauris.</p>
+                    <form id="contactForm" action="mailto:husni060300@gmail.com" method="post" enctype="text/plain">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required data-error="Please enter your name">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Your Email" id="email" class="form-control" name="name" required data-error="Please enter your email">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="subject" name="name" placeholder="Subject" required data-error="Please enter your Subject">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="message" placeholder="Your Message" rows="4" data-error="Write your message" required></textarea>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="submit-button text-center">
+                                    <button class="btn hvr-hover" id="submit" type="submit">Send Message</button>
+                                    <div id="msgSubmit" class="h3 text-center hidden"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Cart -->
 
 @endsection
 
