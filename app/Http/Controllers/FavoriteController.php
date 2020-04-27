@@ -16,11 +16,11 @@ class FavoriteController extends Controller
 
         if ($isFavorite == 0) {
             $user->favorite_posts()->attach($post);
-            Toastr::success('Post Successfully added to your favorite list.', 'Success');
+            Toastr::success('Post Successfully added to your wishlist.', 'Success');
             return redirect()->back();
         } else {
             $user->favorite_posts()->detach($post);
-            Toastr::success('Post successfully removed from your favorite list.', 'Success');
+            Toastr::success('Post successfully removed from your wishlist.', 'Success');
             return redirect()->back();
         }
     }

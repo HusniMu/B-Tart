@@ -49,6 +49,9 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::post('favorite/{post}/add', 'FavoriteController@add')->name('post.favorite');
     Route::post('comment/{post}','CommentController@store')->name('comment.store');
+    Route::get('/cart','CartController@index');
+    Route::post('/cart','CartController@store');
+    Route::delete('/cart/{id}','CartController@destroy');
 });
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function () {

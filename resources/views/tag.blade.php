@@ -43,7 +43,26 @@
                             <div class="mask-icon">
                                 <ul>
                                     <li><a href="{{route('post.details',$post->slug)}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+
+                                    @guest
+                                    <li>
+                                        <a href="javascript:void()0;" onclick="toastr.info('To add wishlist. You neew to login first!.','Info'),{
+                                            closeButton: true,
+                                            progressBar: true,
+                                        }" data-toggle="tooltip" data-placement="right" title="Add to Wishlist">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </li>
+                                    @else
+                                    <li>
+                                        <a href="javascript:void()0;" onclick="document.getElementById('favorite-form-{{$post->id}}').submit();" data-toggle="tooltip" data-placement="right" title="{{!Auth::user()->favorite_posts->where('pivot.post_id',$post->id)->count()==0? 'Remove from wishlist':'Add to wishlist'}}">
+                                            <i class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$post->id)->count()==0? 'fas':'far'}} fa-heart"></i>
+                                        </a>
+                                        <form action="{{route('post.favorite',$post->id)}}" id="favorite-form-{{$post->id}}" method="post" style="display:none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                    @endguest
                                 </ul>
                                 <a class="cart" href="#">Add to Cart</a>
                             </div>

@@ -91,9 +91,13 @@
             <div class="attr-nav">
                 <ul>
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                    <li class="side-menu"><a href="#">
+                    <li class="side-menu"><a href="{{ url('/cart') }}">
                     <i class="fa fa-shopping-bag"></i>
-                        <span class="badge">3</span>
+                        @if(Cart::instance('default')->count()>0)
+                            <span class="badge">{{ Cart::instance('default')->count() }}</span>
+                        @else
+                            <span class="badge">0</span>
+                        @endif
                 </a></li>
                 </ul>
             </div>

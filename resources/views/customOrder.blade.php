@@ -109,8 +109,8 @@
                             <ul>
                                 <li>
                                     <div class="form-group quantity-box">
-                                        <label class="mx-2 control-label" for="note">Note</label>
-                                        <textarea class="form-control" id="note" name="note" placeholder="Note" rows="4">{{old('note')}}</textarea>
+                                        <label class="mx-2 control-label" for="body">Note</label>
+                                        <textarea class="form-control" id="body" name="body" placeholder="Note" rows="4">{{old('body')}}</textarea>
                                     </div>
                                 </li>
                                 <li>
