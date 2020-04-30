@@ -55,14 +55,6 @@
                                     </li>
                                     <li>
                                         <div class="form-group quantity-box">
-                                            <label class="control-label" for="jumlah">Quantity</label>
-                                            <input class="form-control" value="0" min="0" max="{{$post->stok}}" type="number" id="jumlah" name="jumlah">
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        <div class="form-group quantity-box">
                                             <label class="control-label">Rasa: </label>
                                                 @if ($post->tags->count()>0)
                                                 @foreach ($post->tags as $tag)
@@ -79,6 +71,8 @@
                                                 @endif
                                         </div>
                                     </li>
+                                </ul>
+                                <ul>
                                     <li>
                                         <div class="form-group quantity-box">
                                             <label class="control-label">Topping: </label>
@@ -97,8 +91,6 @@
                                             @endif
                                         </div>
                                     </li>
-                                </ul>
-                                <ul>
                                     <li>
                                         <div class="form-group quantity-box">
                                             <label class="control-label">Level: </label>
@@ -117,6 +109,8 @@
                                                 @endif
                                         </div>
                                     </li>
+                                </ul>
+                                <ul>
                                     <li>
                                         <div class="form-group quantity-box">
                                             <label class="control-label">Hiasan: </label>
@@ -135,26 +129,29 @@
                                             @endif
                                         </div>
                                     </li>
+                                    <li>
+                                        <div class="form-group quantity-box">
+                                            <label class="control-label" for="tgl_pengiriman">Tanggal pengiriman</label>
+                                            <input class="form-control" type="date" id="tgl_pengiriman" name="tgl_pengiriman" min="{{$tgl_sekarang.'-'.($tgl_tambah+$post->lama)}}">
+                                        </div>
+                                    </li>
                                 </ul>
 
-                                <div class="form-group quantity-box">
-                                    <label class="control-label" for="tgl_pengiriman">Tanggal pengiriman</label>
-                                    <input class="form-control" type="date" id="tgl_pengiriman" name="tgl_pengiriman" min="{{$tgl_sekarang.'-'.($tgl_tambah+$post->lama)}}">
-                                </div>
+
                                 <div class="price-box-bar">
                                     <div class="cart-and-bay-btn">
                                         <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy</a>
 
                                         @guest
-                                        <button type="submit" class="btn hvr-hover" data-fancybox-close="" onclick="toastr.info('To add product. You must login first!.','Info'),
+                                        <a href="javascript:void()0;" class="btn hvr-hover" data-fancybox-close="" onclick="toastr.info('To add product. You must login first!.','Info'),
                                         {
                                             closeButton: true,
                                             progressBar: true,
                                         }">
                                             Add to cart
-                                        </button>
+                                        </a>
                                         @else
-                                        <form action="{{ url('/cart') }}" method="post">
+                                        <form action="{{ url('/cart') }}" method="post" id="post-cart-form-{{ $post->id }}">
                                             @csrf
 
                                             <input type="hidden" name="id" value="{{ $post->id }}">
@@ -167,9 +164,9 @@
                                             <input type="hidden" name="toppings[]" value="{{ $post->toppings }}">
                                             <input type="hidden" name="hiasans[]" value="{{ $post->hiasans }}">
                                             <input type="hidden" name="levels[]" value="{{ $post->levels }}">
-                                            <button type="submit" class="btn hvr-hover" data-fancybox-close="">
+                                            <a href="javascript:void()0;" onclick="document.getElementById('post-cart-form-{{ $post->id }}').submit()" class="btn hvr-hover" data-fancybox-close="">
                                                 Add to cart
-                                            </button>
+                                            </a>
                                         </form>
                                         @endguest
 
@@ -234,8 +231,40 @@
                                                 </form>
                                             </li>
                                             @endguest
+                                            @guest
+                                            <li>
+                                                <a href="javascript:void()0;" onclick="toastr.info('To add product. You must login first!.','Info'),
+                                                {
+                                                    closeButton: true,
+                                                    progressBar: true,
+                                                }" data-toggle="tooltip" data-placement="right" title="Add to Cart">
+                                                    <i class="fa fa-cart-plus"></i>
+                                                </a>
+                                            </li>
+                                            @else
+                                            <li>
+                                                <form action="{{ url('/cart') }}" method="post" id="cart-form-{{ $randomPost->id }}">
+                                                    @csrf
+
+                                                    <input type="hidden" name="id" value="{{ $randomPost->id }}">
+                                                    <input type="hidden" name="title" value="{{ $randomPost->title }}">
+                                                    <input type="hidden" name="image" value="{{ $randomPost->image }}">
+                                                    <input type="hidden" name="harga" value="{{ $randomPost->harga }}">
+                                                    <input type="hidden" name="body" value="{{ $randomPost->body }}">
+                                                    <input type="hidden" name="categories[]" value="{{ $randomPost->categories }}">
+                                                    <input type="hidden" name="tags[]" value="{{ $randomPost->tags }}">
+                                                    <input type="hidden" name="toppings[]" value="{{ $randomPost->toppings }}">
+                                                    <input type="hidden" name="hiasans[]" value="{{ $randomPost->hiasans }}">
+                                                    <input type="hidden" name="levels[]" value="{{ $randomPost->levels }}">
+                                                    <a href="javascript:void()0;" onclick="document.getElementById('cart-form-{{ $randomPost->id }}').submit()"  data-toggle="tooltip" data-placement="right" title="Add to Cart">
+                                                        <i class="fa fa-cart-plus"></i>
+                                                    </a>
+                                                </form>
+                                            </li>
+                                            @endguest
                                         </ul>
-                                        <a class="cart" href="#">Add to Cart</a>
+
+
                                     </div>
                                 </div>
                                 <div class="why-text">

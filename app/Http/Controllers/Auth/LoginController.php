@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Cart;
 
 class LoginController extends Controller
 {
@@ -37,6 +38,10 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        // $userId = Auth::user()->id;
+        // \Cart::restore($userId);
+        // \Cart::instance('wishlist')->restore($userId);
+
         if (Auth::check() && Auth::user()->role->id == 1) {
             $this->redirectTo = route('admin.dashboard');
         } else {

@@ -35,9 +35,6 @@
             <div class="col-lg-3 col-md-4 col-sm-6 special-grid">
                 <div class="products-single fix">
                     <div class="box-img-hover">
-                        <div class="type-lb">
-                            <p class="sale">Sale</p>
-                        </div>
                         <img src="{{URL::asset('storage/post/'.$post->image)}}" class="img-fluid product-card" alt="Image">
                         <div class="mask-icon">
                             <ul>
@@ -62,8 +59,38 @@
                                     </form>
                                 </li>
                                 @endguest
+                                @guest
+                                <li>
+                                    <a href="javascript:void()0;" onclick="toastr.info('To add product. You must login first!.','Info'),
+                                    {
+                                        closeButton: true,
+                                        progressBar: true,
+                                    }" data-toggle="tooltip" data-placement="right" title="Add to Cart">
+                                        <i class="fa fa-cart-plus"></i>
+                                    </a>
+                                </li>
+                                @else
+                                <li>
+                                    <form action="{{ url('/cart') }}" method="post" id="cart-form-{{ $post->id }}">
+                                        @csrf
+
+                                        <input type="hidden" name="id" value="{{ $post->id }}">
+                                        <input type="hidden" name="title" value="{{ $post->title }}">
+                                        <input type="hidden" name="image" value="{{ $post->image }}">
+                                        <input type="hidden" name="harga" value="{{ $post->harga }}">
+                                        <input type="hidden" name="body" value="{{ $post->body }}">
+                                        <input type="hidden" name="categories[]" value="{{ $post->categories }}">
+                                        <input type="hidden" name="tags[]" value="{{ $post->tags }}">
+                                        <input type="hidden" name="toppings[]" value="{{ $post->toppings }}">
+                                        <input type="hidden" name="hiasans[]" value="{{ $post->hiasans }}">
+                                        <input type="hidden" name="levels[]" value="{{ $post->levels }}">
+                                        <a href="javascript:void()0;" onclick="document.getElementById('cart-form-{{ $post->id }}').submit()"  data-toggle="tooltip" data-placement="right" title="Add to Cart">
+                                            <i class="fa fa-cart-plus"></i>
+                                        </a>
+                                    </form>
+                                </li>
+                                @endguest
                             </ul>
-                            <a class="cart" href="#">Add to Cart</a>
                         </div>
                     </div>
                     <div class="why-text">

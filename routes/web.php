@@ -52,6 +52,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/cart','CartController@index');
     Route::post('/cart','CartController@store');
     Route::delete('/cart/{id}','CartController@destroy');
+    Route::post('/cart/saveForLater/{id}','CartController@saveForLater');
+
+    Route::delete('/saveForLater/{id}','SaveForLaterController@destroy');
+    Route::post('/saveForLater/moveToCart/{id}','SaveForLaterController@moveToCart');
 });
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function () {
