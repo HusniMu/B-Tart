@@ -4,7 +4,8 @@
 @section('title', "Make your's own desired cake")
 
 @push('css')
-<link href="{{asset('assets/backend/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
+{{-- <link href="{{asset('assets/backend/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" /> --}}
+<link href="{{asset('assets/frontend/js/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
 <style>
     .product-card{
         height: 100%;
@@ -29,112 +30,125 @@
                 </div>
             </div>
             <div class="col-xl-7 col-lg-7 col-md-6">
-                <div class="single-product-details">
-                    <h2>Custom Cake</h2>
-                    {{-- <h5>Rp. {{number_format($post->harga, 2, ',', '.')}}</h5> --}}
-                    <p class="available-stock"><span> Minimal waktu pemesanan : {{$lama}} <strong>hari</strong></span>
-                        <p>
-                            <ul>
-                                <li>
-                                    <div class="form-group quantity-box">
-                                        <label for="category" class="control-label">Select Kategori</label>
-                                        <select class="form-control show-tick" id="category" name="category"
-                                            data-live-search="true">
-                                            <option value="tidak ada" selected disabled>---</option>
-                                            @foreach ($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-group quantity-box">
-                                        <label class="control-label" for="jumlah">Quantity</label>
-                                        <input class="form-control" value="0" min="0" max="10" type="number" id="jumlah" name="jumlah">
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul>
-                                <li>
-                                    <div class="form-group quantity-box">
-                                        <label for="tag" class="control-label">Select Rasa</label>
-                                        <select class="form-control show-tick" id="tag" name="tag"
-                                            data-live-search="true">
-                                            <option value="tidak ada" selected disabled>---</option>
-                                            @foreach ($tags as $tag)
-                                            <option value="{{$tag->id}}">{{$tag->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-group quantity-box">
-                                        <label for="topping" class="control-label">Select Topping</label>
-                                        <select class="form-control show-tick" id="topping" name="topping"
-                                            data-live-search="true">
-                                            <option value="tidak ada" selected disabled>---</option>
-                                            @foreach ($toppings as $topping)
-                                            <option value="{{$topping->id}}">{{$topping->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul>
-                                <li>
-                                    <div class="form-group quantity-box">
-                                        <label for="level" class="control-label">Select Level</label>
-                                        <select class="form-control show-tick" id="level" name="level"
-                                            data-live-search="true">
-                                            <option value="tidak ada" selected disabled>---</option>
-                                            @foreach ($levels as $level)
-                                            <option value="{{$level->id}}">{{$level->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-group quantity-box">
-                                        <label for="hiasan" class="control-label">Select Hiasan</label>
-                                        <select class="form-control show-tick" id="hiasan" name="hiasan"
-                                            data-live-search="true">
-                                            <option value="tidak ada" selected disabled>---</option>
-                                            @foreach ($hiasans as $hiasan)
-                                            <option value="{{$hiasan->id}}">{{$hiasan->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </li>
-                            </ul>
-                            <ul>
-                                <li>
-                                    <div class="form-group quantity-box">
-                                        <label class="mx-2 control-label" for="body">Note</label>
-                                        <textarea class="form-control" id="body" name="body" placeholder="Note" rows="4">{{old('body')}}</textarea>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-group quantity-box">
-                                        <label class="control-label" for="bentuk">Bentuk</label>
-                                        <input type="file" name="bentuk" id="bentuk">
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="form-group quantity-box">
-                                <label class="control-label" for="tgl_pengiriman">Tanggal pengiriman</label>
-                                <input class="form-control" type="date" id="tgl_pengiriman" name="tgl_pengiriman" min="{{$tgl_sekarang.'-'.($tgl_tambah+$lama)}}">
-                            </div>
+                <form action="{{ url('/cart') }}" method="post" id="post-cart-form-{{ $cusId }}">
+                    @csrf
+                    <div class="single-product-details">
+                        <h2>Custom Cake</h2>
+                        <input type="hidden" name="id" value="{{ $cusId }}">
+                        <input type="hidden" name="title" value="{{ $cusName }}">
+                        <input type="hidden" name="harga" value="{{ $harga }}">
+                        {{-- <h5>Rp. {{number_format($post->harga, 2, ',', '.')}}</h5> --}}
+                        <p class="available-stock"><span> Minimal waktu pemesanan : {{$lama}} <strong>hari</strong></span>
+                            <p>
+                                <ul>
+                                    <li>
+                                        <div class="form-group quantity-box">
+                                            <label for="category" class="control-label">Select Kategori</label>
+                                            <select class="form-control show-tick" id="category" name="category"
+                                                data-live-search="true">
+                                                <option value="tidak ada" selected disabled>---</option>
+                                                @foreach ($categories as $category)
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-group quantity-box">
+                                            <label class="control-label" for="bentuk">Bentuk</label>
+                                            <input type="file" name="bentuk" id="bentuk">
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <div class="form-group quantity-box">
+                                            <label for="tag" class="control-label">Select Rasa</label>
+                                            <select class="form-control show-tick" id="tag" name="tags[]" multiple
+                                    data-live-search="true">
+                                                <option value="tidak ada" selected disabled>---</option>
+                                                @foreach ($tags as $tag)
+                                                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-group quantity-box">
+                                            <label for="topping" class="control-label">Select Topping</label>
+                                            <select class="form-control show-tick" id="topping" name="toppings[]" multiple
+                                                data-live-search="true">
+                                                <option value="tidak ada" selected disabled>---</option>
+                                                @foreach ($toppings as $topping)
+                                                <option value="{{$topping->id}}">{{$topping->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <div class="form-group quantity-box">
+                                            <label for="level" class="control-label">Select Level</label>
+                                            <select class="form-control show-tick" id="level" name="level"
+                                                data-live-search="true">
+                                                <option value="tidak ada" selected disabled>---</option>
+                                                @foreach ($levels as $level)
+                                                <option value="{{$level->id}}">{{$level->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-group quantity-box">
+                                            <label for="hiasan" class="control-label">Select Hiasan</label>
+                                            <select class="form-control show-tick" id="hiasan" name="hiasans[]" multiple
+                                    data-live-search="true">
+                                                <option value="tidak ada" selected disabled>---</option>
+                                                @foreach ($hiasans as $hiasan)
+                                                <option value="{{$hiasan->id}}">{{$hiasan->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <div class="form-group quantity-box">
+                                            <label class="mx-2 control-label" for="body">Note</label>
+                                            <textarea class="form-control" id="body" name="body" placeholder="Note" rows="4">{{old('body')}}</textarea>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-group quantity-box">
+                                            <label class="control-label" for="tgl_pengiriman">Tanggal pengiriman</label>
+                                            <input class="form-control" type="date" id="tgl_pengiriman" name="tgl_pengiriman" min="{{$tgl_sekarang.'-'.($tgl_tambah+$lama)}}">
+                                        </div>
+                                    </li>
+                                </ul>
 
-
-
-                            <div class="price-box-bar">
-                                <div class="cart-and-bay-btn">
-                                    <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a>
-                                    <a class="btn hvr-hover" data-fancybox-close="" href="#">Add to cart</a>
+                                <div class="price-box-bar">
+                                    <div class="cart-and-bay-btn">
+                                        {{-- <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy New</a> --}}
+                                        @guest
+                                        <a href="javascript:void()0;" class="btn hvr-hover" data-fancybox-close="" onclick="toastr.info('To add product. You must login first!.','Info'),
+                                        {
+                                            closeButton: true,
+                                            progressBar: true,
+                                        }">
+                                            Add to cart
+                                        </a>
+                                        @else
+                                        {{-- <a href="javascript:void()0;" onclick="document.getElementById('post-cart-form-{{ $cusId }}').submit()" class="btn hvr-hover" data-fancybox-close=""> --}}
+                                        <a href="" class="btn hvr-hover">
+                                            Add to cart
+                                        </a>
+                                        @endguest
+                                    </div>
                                 </div>
-                            </div>
-                        </p>
-                </div>
+                            </p>
+                    </div>
+                </form>
             </div>
         </div>
         {{-- end detail produk --}}
@@ -155,9 +169,60 @@
                                     <div class="mask-icon">
                                         <ul>
                                             <li><a href="{{route('post.details',$randomPost->slug)}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+
+                                            @guest
+                                            <li>
+                                                <a href="javascript:void()0;" onclick="toastr.info('To add wishlist. You neew to login first!.','Info'),{
+                                                    closeButton: true,
+                                                    progressBar: true,
+                                                }" data-toggle="tooltip" data-placement="right" title="Add to Wishlist">
+                                                    <i class="far fa-heart"></i>
+                                                </a>
+                                            </li>
+                                            @else
+                                            <li>
+                                                <a href="javascript:void()0;" onclick="document.getElementById('favorite-form-{{$randomPost->id}}').submit();" data-toggle="tooltip" data-placement="right" title="{{!Auth::user()->favorite_posts->where('pivot.post_id',$randomPost->id)->count()==0? 'Remove from wishlist':'Add to wishlist'}}">
+                                                    <i class="{{!Auth::user()->favorite_posts->where('pivot.post_id',$randomPost->id)->count()==0? 'fas':'far'}} fa-heart"></i>
+                                                </a>
+                                                <form action="{{route('post.favorite',$randomPost->id)}}" id="favorite-form-{{$randomPost->id}}" method="post" style="display:none;">
+                                                    @csrf
+                                                </form>
+                                            </li>
+                                            @endguest
+                                            @guest
+                                            <li>
+                                                <a href="javascript:void()0;" onclick="toastr.info('To add product. You must login first!.','Info'),
+                                                {
+                                                    closeButton: true,
+                                                    progressBar: true,
+                                                }" data-toggle="tooltip" data-placement="right" title="Add to Cart">
+                                                    <i class="fa fa-cart-plus"></i>
+                                                </a>
+                                            </li>
+                                            @else
+                                            <li>
+                                                <form action="{{ url('/cart') }}" method="post" id="cart-form-{{ $randomPost->id }}">
+                                                    @csrf
+
+                                                    <input type="hidden" name="id" value="{{ $randomPost->id }}">
+                                                    <input type="hidden" name="title" value="{{ $randomPost->title }}">
+                                                    <input type="hidden" name="image" value="{{ $randomPost->image }}">
+                                                    <input type="hidden" name="harga" value="{{ $randomPost->harga }}">
+                                                    <input type="hidden" name="body" value="{{ $randomPost->body }}">
+                                                    <input type="hidden" name="categories[]" value="{{ $randomPost->categories }}">
+                                                    <input type="hidden" name="tags[]" value="{{ $randomPost->tags }}">
+                                                    <input type="hidden" name="toppings[]" value="{{ $randomPost->toppings }}">
+                                                    <input type="hidden" name="hiasans[]" value="{{ $randomPost->hiasans }}">
+                                                    <input type="hidden" name="levels[]" value="{{ $randomPost->levels }}">
+                                                    <a href="javascript:void()0;" onclick="document.getElementById('cart-form-{{ $randomPost->id }}').submit()"  data-toggle="tooltip" data-placement="right" title="Add to Cart">
+                                                        <i class="fa fa-cart-plus"></i>
+                                                    </a>
+                                                </form>
+                                            </li>
+                                            @endguest
                                         </ul>
-                                        <a class="cart" href="#">Add to Cart</a>
+
+
                                     </div>
                                 </div>
                                 <div class="why-text">
@@ -183,5 +248,7 @@
 @endsection
 
 @push('js')
-<script src="{{asset('assets/backend/plugins/bootstrap-select/js/bootstrap-select.js')}}"></script>
+{{-- select plugin --}}
+<script src="{{asset('assets/frontend/js/bootstrap-select/js/bootstrap-select.js')}}"></script>
+{{-- <script src="{{asset('assets/frontend/js/bootstrap-select.js')}}"></script> --}}
 @endpush

@@ -4,13 +4,26 @@
 @section('title','Shopping Cart')
 
 @push('css')
-
+<style>
+    .banner-img{
+        background: url({{URL::asset('storage/images/default-banner.jpg')}}) no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        text-align: center;
+        background-attachment: fixed;
+        padding: 70px 0px;
+        position: relative;
+    }
+</style>
 @endpush
 
 @section('content')
 
 <!-- Start All Title Box -->
-<div class="all-title-box">
+<div class="banner-img all-title-box">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -57,10 +70,10 @@
                                             <p>Rp. {{ number_format($item->model->harga, 2, ',', '.') }}</p>
                                         </td>
                                         <td class="quantity-box">
-                                            <input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text">
+                                            <input type="number" size="4" min="0" max="{{ $item->model->stok }}" step="1" class="c-input-text qty text quantity" data-id="{{ $item->rowId }}" value="{{ $item->qty }}">
                                         </td>
                                         <td class="total-pr">
-                                            <p>$ 80.0</p>
+                                            <p>Rp. {{ number_format(($item->model->harga*$item->qty), 2, ',', '.') }}</p>
                                         </td>
                                         <td class="remove-pr">
                                             <form action="/cart/saveForLater/{{ $item->rowId }}" method="POST">
@@ -112,7 +125,7 @@
                     </div>
                 </div>
                 <div class="col-6 d-flex shopping-box"><a href="/" class="ml-auto btn hvr-hover">Continue Shopping</a> </div>
-                <div class="col-6 d-flex shopping-box"><a href="checkout.html" class="ml-auto btn hvr-hover">Checkout</a> </div>
+                <div class="col-6 d-flex shopping-box"><a href="{{ route('checkout.index') }}" class="ml-auto btn hvr-hover">Checkout</a> </div>
             </div>
 
         </div>
@@ -131,7 +144,7 @@
 @endif
 
 {{-- save for later --}}
-<div class="all-title-box">
+<div class="banner-img all-title-box">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -221,5 +234,25 @@
 @endsection
 
 @push('js')
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        (function(){
+            const classname = document.querySelectorAll('.quantity')
 
+            Array.from(classname).forEach(function(element){
+                element.addEventListener('change', function(){
+                    const id = element.getAttribute('data-id')
+                    axios.patch(`/cart/${id}`,{
+                        quantity: this.value
+                    })
+                    .then(function(response){
+                        window.location.href = '{{ url("/cart") }}'
+                    })
+                    .catch(function(error){
+                        window.location.href = '{{ url("/cart") }}'
+                    });
+                })
+            })
+        })();
+    </script>
 @endpush

@@ -5,6 +5,18 @@
 
 @push('css')
 <style>
+    .banner-img{
+        background: url({{URL::asset('storage/images/default-banner.jpg')}}) no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        text-align: center;
+        background-attachment: fixed;
+        padding: 70px 0px;
+        position: relative;
+    }
     .product-card{
         height: 250px;
         object-fit: cover;

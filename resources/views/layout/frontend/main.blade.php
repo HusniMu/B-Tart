@@ -53,7 +53,8 @@
     <script src="{{asset('assets/frontend/js/bootstrap.min.js')}}"></script>
     <!-- ALL PLUGINS -->
     <script src="{{asset('assets/frontend/js/jquery.superslides.min.js')}}"></script>
-    <script src="{{asset('assets/frontend/js/bootstrap-select.js')}}"></script>
+    {{-- <script src="{{asset('assets/frontend/js/bootstrap-select.js')}}"></script> --}}
+    <script src="{{asset('assets/frontend/js/bootstrap-select/js/bootstrap-select.js')}}"></script>
     <script src="{{asset('assets/frontend/js/inewsticker.js')}}"></script>
     <script src="{{asset('assets/frontend/js/bootsnav.js.')}}"></script>
     <script src="{{asset('assets/frontend/js/images-loded.min.js')}}"></script>

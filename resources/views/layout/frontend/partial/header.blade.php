@@ -63,7 +63,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="{{route('home')}}"><img src="images/logo.png" class="logo" alt=""></a>
+            <a class="navbar-brand" href="{{route('home')}}"><img src="{{URL::asset('storage/images/logo.png')}}" class="logo" alt="" style="max-width:100%;max-height:75px;"></a>
             </div>
             <!-- End Header Navigation -->
 
@@ -104,7 +104,7 @@
             <!-- End Atribute Navigation -->
         </div>
         <!-- Start Side Menu -->
-        <div class="side">
+        {{-- <div class="side">
             <a href="#" class="close-side"><i class="fa fa-times"></i></a>
             <li class="cart-box">
                 <ul class="cart-list">
@@ -129,7 +129,7 @@
                     </li>
                 </ul>
             </li>
-        </div>
+        </div> --}}
         <!-- End Side Menu -->
     </nav>
     <!-- End Navigation -->

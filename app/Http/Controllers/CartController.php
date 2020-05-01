@@ -6,6 +6,7 @@ use Cart;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -32,6 +33,29 @@ class CartController extends Controller
         \Cart::add($request->id, $request->title, 1, $request->harga)->associate('App\Post');
         Toastr::success('Post Successfully added to your cart.', 'Success');
         return back();
+    }
+
+    public function update(Request $request, $id)
+    {
+        // $validator = Validator::make($request->all(), [
+        //     'stok' => 'required|numeric|between:1,5'
+        // ]);
+
+        // if ($validator->fails()) {
+        //     // session()->flash('errors', collect(['Quantity must be between 1 and 5.']));
+        //     Toastr::info('We currently do not have enough items in stock.', 'info');
+        //     return response()->json(['success' => false], 400);
+        // }
+
+        // if ($request->quantity > $request->productQuantity) {
+        //     // session()->flash('errors', collect(['We currently do not have enough items in stock.']));
+        //     Toastr::info('We currently do not have enough items in stock.', 'info');
+        //     return response()->json(['success' => false], 400);
+        // }
+
+        \Cart::update($id,$request->quantity);
+        Toastr::success('Cart Successfully updated.', 'Success');
+        return response()->json(['success'=>true]);
     }
 
     public function destroy($id)

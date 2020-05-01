@@ -51,11 +51,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('comment/{post}','CommentController@store')->name('comment.store');
     Route::get('/cart','CartController@index');
     Route::post('/cart','CartController@store');
+    Route::patch('/cart/{id}','CartController@update');
     Route::delete('/cart/{id}','CartController@destroy');
     Route::post('/cart/saveForLater/{id}','CartController@saveForLater');
 
     Route::delete('/saveForLater/{id}','SaveForLaterController@destroy');
     Route::post('/saveForLater/moveToCart/{id}','SaveForLaterController@moveToCart');
+
+    Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+    Route::post('/finish', function(){
+        return redirect()->route('welcome');
+    })->name('checkout.finish');
+    Route::post('/checkout/store', 'CheckoutController@store')->name('checkout.store');
+    Route::post('/notification/handles', 'CheckoutController@notificationHandler')->name('notification.handler');
+
 });
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function () {

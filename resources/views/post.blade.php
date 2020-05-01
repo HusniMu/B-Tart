@@ -140,7 +140,7 @@
 
                                 <div class="price-box-bar">
                                     <div class="cart-and-bay-btn">
-                                        <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy</a>
+                                        {{-- <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy</a> --}}
 
                                         @guest
                                         <a href="javascript:void()0;" class="btn hvr-hover" data-fancybox-close="" onclick="toastr.info('To add product. You must login first!.','Info'),
