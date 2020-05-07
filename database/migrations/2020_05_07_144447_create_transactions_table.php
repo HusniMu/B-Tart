@@ -15,6 +15,17 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('post_id')->unsigned()->nullable();
+            $table->bigInteger('custom_order_id')->unsigned()->nullable();
+            $table->bigInteger('users_id')->unsigned()->nullable();
+            $table->bigInteger('transaction_total');
+            $table->string('nama');
+            $table->string('email');
+            $table->text('alamat_lengkap');
+            $table->string('zip');
+            $table->string('no_hp');
+            $table->string('transaction_status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
