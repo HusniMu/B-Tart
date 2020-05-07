@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="col-xl-7 col-lg-7 col-md-6">
-                <form action="{{ url('/cart-custom') }}" method="post" id="post-cart-form-{{ $id }}">
+                <form action="{{ url('/cart-custom') }}" method="post" id="post-cart-form-{{ $id }}" enctype="multipart/form-data">
                     @csrf
                     <div class="single-product-details">
                         <h2>Custom Cake</h2>
@@ -57,7 +57,7 @@
                                     <li>
                                         <div class="form-group quantity-box">
                                             <label class="control-label" for="image">Bentuk</label>
-                                            <input type="file" name="image" id="image">
+                                            <input type="file" name="image" id="image" autofocus value="{{old('image')}}">
                                         </div>
                                     </li>
                                 </ul>

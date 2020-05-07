@@ -83,12 +83,19 @@
                                         <h3>Shopping cart</h3>
                                     </div>
                                     <div class="rounded p-2 bg-light">
-                                        @foreach(Cart::content() as $item)
-                                        <div class="media mb-2 border-bottom">
-                                            <div class="media-body"> <a href="{{route('post.details',$item->model->slug)}}"> {{ $item->model->title }}</a>
-                                                <div class="small text-muted">Price: Rp. {{ number_format($item->model->harga, 2, ',', '.') }} <span class="mx-2">|</span> Qty: {{ $item->qty }} <span class="mx-2">|</span> Subtotal: Rp. {{ number_format(($item->model->harga*$item->qty), 2, ',', '.') }}</div>
+                                        @foreach($produk as $item)
+                                            <div class="media mb-2 border-bottom">
+                                                <div class="media-body"> <a href="{{route('post.details',$item->model->slug)}}"> {{ $item->model->title }}</a>
+                                                    <div class="small text-muted">Price: Rp. {{ number_format($item->model->harga, 2, ',', '.') }} <span class="mx-2">|</span> Qty: {{ $item->qty }} <span class="mx-2">|</span> Subtotal: Rp. {{ number_format(($item->model->harga*$item->qty), 2, ',', '.') }}</div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endforeach
+                                        @foreach(Cart::instance('cusPro')->content() as $item)
+                                            <div class="media mb-2 border-bottom">
+                                                <div class="media-body"> <a href="{{route('post.details',$item->model->slug)}}"> {{ $item->model->title }}</a>
+                                                    <div class="small text-muted">Price: Rp. {{ number_format($item->model->harga, 2, ',', '.') }} <span class="mx-2">|</span> Qty: {{ $item->qty }} <span class="mx-2">|</span> Subtotal: Rp. {{ number_format(($item->model->harga*$item->qty), 2, ',', '.') }}</div>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -105,11 +112,27 @@
                                     <hr class="my-1">
                                     <div class="d-flex">
                                         <h4>Sub Total</h4>
-                                        <div class="ml-auto font-weight-bold"> Rp. {{ Cart::subtotal() }} </div>
+                                        <div class="ml-auto font-weight-bold">
+                                            @php
+                                                $subProduk = (float)Cart::instance('produk')->subtotal();
+                                                $subCus = (float)Cart::instance('cusPro')->subtotal();
+                                                $subTotal = ($subProduk+$subCus)*1000;
+                                            @endphp
+                                            <input type="hidden" name="subTotal" value="{{ $subTotal }}">
+                                            Rp. {{ number_format($subTotal, 2, ',', '.') }}
+                                        </div>
                                     </div>
                                     <div class="d-flex">
                                         <h4>Tax</h4>
-                                        <div class="ml-auto font-weight-bold"> Rp. {{ Cart::tax() }} </div>
+                                        <div class="ml-auto font-weight-bold">
+                                            @php
+                                                $taxProduk = (float)Cart::instance('produk')->tax();
+                                                $taxCus = (float)Cart::instance('cusPro')->tax();
+                                                $subTotalTax = ($taxProduk+$taxCus)*1000;
+                                            @endphp
+                                            <input type="hidden" name="subTotalTax" value="{{ $subTotalTax }}">
+                                            Rp. {{ number_format($subTotalTax, 2, ',', '.') }}
+                                        </div>
                                     </div>
                                     <div class="d-flex">
                                         <h4>Shipping Cost</h4>
@@ -118,8 +141,13 @@
                                     <hr>
                                     <div class="d-flex gr-total">
                                         <h5>Grand Total</h5>
-                                        <div class="ml-auto h5"> Rp. {{ Cart::total() }} </div>
-                                        <input type="hidden" name="total" value="{{ Cart::total() }}">
+                                        <div class="ml-auto h5">
+                                            @php
+                                                $total = ($subTotal+$subTotalTax);
+                                            @endphp
+                                            <input type="hidden" name="total" value="{{ $total }}">
+                                            Rp. {{ number_format($total, 2, ',', '.') }}
+                                        </div>
                                     </div>
                                     <hr> </div>
                             </div>

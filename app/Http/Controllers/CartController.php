@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\CustomOrder;
-use Carbon\Carbon;
 use Cart;
+use Carbon\Carbon;
+use App\CustomOrder;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class CartController extends Controller
 {
@@ -59,7 +61,6 @@ class CartController extends Controller
         $post->image = $imageName;
         $post->body = $request->body;
         $post->lama = $request->lama;
-        $post->harga = $request->harga;
         $post->save();
 
         $post->categories()->attach($request->category);
@@ -84,6 +85,7 @@ class CartController extends Controller
         //     $harga_tmp = $level->harga;
         //     $post->harga += $harga_tmp;
         // }
+        // $post->save();
 
 
         $duplicate = \Cart::search(function($cartItem, $rowId) use ($request){

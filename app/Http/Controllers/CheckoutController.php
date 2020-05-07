@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Veritrans_Snap;
 use Veritrans_Config;
+use Cart;
 use App\Model\transaction;
 use Veritrans_Notification;
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        return view('checkout');
+        $produk = Cart::instance('produk')->content();
+        return view('checkout',compact('produk'));
     }
 
     protected $request;
