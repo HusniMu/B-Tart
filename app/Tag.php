@@ -12,4 +12,9 @@ class Tag extends Model
     {
         return $this->belongsToMany('App\Post')->withTimestamps();
     }
+
+    public function customOrder()
+    {
+        return $this->belongsToMany('App\CustomOrder')->withTimestamps();
+    }
 }

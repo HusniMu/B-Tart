@@ -25,18 +25,19 @@
             <div class="col-xl-5 col-lg-5 col-md-6">
                 <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active"> <img class="d-block w-100 product-card" src="default.png" alt="First slide"> </div>
+                        <div class="carousel-item active"> <img class="d-block w-100 product-card" src="{{URL::asset('storage/images/kue.jpg')}}" alt="First slide"> </div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-7 col-lg-7 col-md-6">
-                <form action="{{ url('/cart') }}" method="post" id="post-cart-form-{{ $cusId }}">
+                <form action="{{ url('/cart-custom') }}" method="post" id="post-cart-form-{{ $id }}">
                     @csrf
                     <div class="single-product-details">
                         <h2>Custom Cake</h2>
-                        <input type="hidden" name="id" value="{{ $cusId }}">
-                        <input type="hidden" name="title" value="{{ $cusName }}">
+                        <input type="hidden" name="id" value="{{ $id }}">
+                        <input type="hidden" name="title" value="{{ $title }}">
                         <input type="hidden" name="harga" value="{{ $harga }}">
+                        <input type="hidden" name="lama" value="{{ $lama }}">
                         {{-- <h5>Rp. {{number_format($post->harga, 2, ',', '.')}}</h5> --}}
                         <p class="available-stock"><span> Minimal waktu pemesanan : {{$lama}} <strong>hari</strong></span>
                             <p>
@@ -55,8 +56,8 @@
                                     </li>
                                     <li>
                                         <div class="form-group quantity-box">
-                                            <label class="control-label" for="bentuk">Bentuk</label>
-                                            <input type="file" name="bentuk" id="bentuk">
+                                            <label class="control-label" for="image">Bentuk</label>
+                                            <input type="file" name="image" id="image">
                                         </div>
                                     </li>
                                 </ul>
@@ -139,9 +140,9 @@
                                             Add to cart
                                         </a>
                                         @else
-                                        {{-- <a href="javascript:void()0;" onclick="document.getElementById('post-cart-form-{{ $cusId }}').submit()" class="btn hvr-hover" data-fancybox-close=""> --}}
-                                        <a href="" class="btn hvr-hover">
-                                            Add to cart
+                                        <a href="javascript:void()0;" onclick="document.getElementById('post-cart-form-{{ $id }}').submit()" class="btn hvr-hover" data-fancybox-close="">
+                                        {{-- <a href="" class="btn hvr-hover"> --}}
+                                            Add cart
                                         </a>
                                         @endguest
                                     </div>

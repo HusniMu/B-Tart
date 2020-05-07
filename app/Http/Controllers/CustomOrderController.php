@@ -23,11 +23,11 @@ class CustomOrderController extends Controller
         $lama = 7;
         $tgl_sekarang = Carbon::now()->format('Y-m');
         $tgl_tambah = Carbon::now()->format('d');
-        $cusId = Carbon::now()->format('YmdHis');
-        $cusName = "custom-".$cusId;
+        $id = Carbon::now()->format('YmdHis');
+        $title = "custom-".$id;
         $harga = 150000;
 
         $randomPosts = Post::published()->take(4)->inRandomOrder()->get();
-        return view('customOrder',compact('categories','tags','toppings','hiasans','levels','lama','tgl_sekarang','tgl_tambah','randomPosts','cusId','cusName','harga'));
+        return view('customOrder',compact('categories','tags','toppings','hiasans','levels','lama','tgl_sekarang','tgl_tambah','randomPosts','id','title','harga'));
     }
 }

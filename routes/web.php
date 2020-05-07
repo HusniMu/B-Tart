@@ -50,8 +50,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('favorite/{post}/add', 'FavoriteController@add')->name('post.favorite');
     Route::post('comment/{post}','CommentController@store')->name('comment.store');
     Route::get('/cart','CartController@index');
+    Route::post('/cart-custom','CartController@cusStore');
     Route::post('/cart','CartController@store');
     Route::patch('/cart/{id}','CartController@update');
+    Route::delete('/cart-custom/{id}','CartController@destroyCus');
     Route::delete('/cart/{id}','CartController@destroy');
     Route::post('/cart/saveForLater/{id}','CartController@saveForLater');
 

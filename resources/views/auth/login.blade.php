@@ -3,11 +3,25 @@
 @push('css')
 <link href="{{asset('assets/frontend/css/auth/styles.css')}}" rel="stylesheet">
 <link href="{{asset('assets/frontend/css/auth/responsive.css')}}" rel="stylesheet">
+<style>
+    .banner-img{
+        background: url({{URL::asset('storage/images/default-banner.jpg')}}) no-repeat center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        text-align: center;
+        background-attachment: fixed;
+        padding: 70px 0px;
+        position: relative;
+    }
+</style>
 @endpush
 
 @section('content')
 <!-- Start All Title Box -->
-<div class="all-title-box">
+<div class="banner-img all-title-box">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">

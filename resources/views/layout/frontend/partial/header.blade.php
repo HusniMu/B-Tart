@@ -93,8 +93,9 @@
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                     <li class="side-menu"><a href="{{ url('/cart') }}">
                     <i class="fa fa-shopping-bag"></i>
-                        @if(Cart::instance('default')->count()>0)
-                            <span class="badge">{{ Cart::instance('default')->count() }}</span>
+                        @if(Cart::instance('produk')->count()>0 || Cart::instance('cusPro')->count()>0)
+                            <span class="badge">{{ Cart::instance('produk')->count() + Cart::instance('cusPro')->count() }}</span>
+                            {{-- <span class="badge">{{ Cart::instance('cusPro')->count() }}</span> --}}
                         @else
                             <span class="badge">0</span>
                         @endif
