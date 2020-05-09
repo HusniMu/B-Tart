@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDetailToCategories extends Migration
+class AddTanggalToCustomOrders extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddDetailToCategories extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->text('body')->nullable();
+        Schema::table('custom_orders', function (Blueprint $table) {
+            $table->date('tgl_pengiriman')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddDetailToCategories extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
+        Schema::table('custom_orders', function (Blueprint $table) {
             //
         });
     }

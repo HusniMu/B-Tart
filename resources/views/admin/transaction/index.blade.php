@@ -1,5 +1,5 @@
 @extends('layout.backend.main')
-@section('title','Tag Admin')
+@section('title','Transaction Admin')
 
 @push('css')
 <link href="{{asset('assets/backend/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}"
@@ -9,12 +9,6 @@
 @section('content')
 
 <div class="container-fluid">
-    <div class="block-header">
-        <a href="{{route('admin.tag.create')}}" class="btn btn-primary waves-effect">
-            <i class="material-icons">add</i>
-            <span>Tambah Rasa Baru</span>
-        </a>
-    </div>
     <!-- Basic Examples -->
     <!-- #END# Basic Examples -->
     <!-- Exportable Table -->
@@ -23,8 +17,9 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        Semua Rasa
-                        <span class="badge bg-info">{{$tags->count()}}</span>
+                        ALL Transactions
+                        <span class="badge bg-info">{{$transactions->count()}}</span>
+                        {{-- {{ var_dump($transactions) }} --}}
                     </h2>
                 </div>
                 <div class="body">
@@ -33,44 +28,50 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Harga</th>
-                                    <th>Post Count</th>
-                                    <th>Created At</th>
-                                    <th>Updated At</th>
+                                    <th>post</th>
+                                    <th>custom order</th>
+                                    <th>user</th>
+                                    <th>total</th>
+                                    <th>status</th>
+                                    {{-- <th>Updated At</th> --}}
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Harga</th>
-                                    <th>Post Count</th>
-                                    <th>Created At</th>
-                                    <th>Updated At</th>
+                                    <th>post</th>
+                                    <th>custom order</th>
+                                    <th>user</th>
+                                    <th>total</th>
+                                    <th>status</th>
+                                    {{-- <th>Updated At</th> --}}
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @foreach ($tags as $key=>$tag)
+                                @foreach ($transactions as $transaction)
                                 <tr>
-                                    <td>{{$key + 1}}</td>
-                                    <td>{{$tag->name}}</td>
-                                    <td>{{$tag->harga}}</td>
-                                    <td>{{$tag->posts->count()}}</td>
-                                    <td>{{$tag->created_at}}</td>
-                                    <td>{{$tag->updated_at}}</td>
-                                    <td class="text-center">
-                                        <a href="{{route('admin.tag.edit',$tag->id)}}"
+                                    <td>{{$transaction->id}}</td>
+                                    <td>{{ $transaction->post->title}}</td>
+                                    <td>{{$transaction->custom->title}}</td>
+                                    <td>{{$transaction->user->name}}</td>
+                                    <td>{{$transaction->transaction_total}}</td>
+                                    <td>{{$transaction->transaction_status}}</td>
+                                    <td>
+                                        <a href="{{route('admin.transaction.show',$transaction->id)}}"
+                                            class="btn btn-info waves-effect">
+                                            <i class="material-icons">visibility</i>
+                                        </a>
+                                        <a href="{{route('admin.transaction.edit',$transaction->id)}}"
                                             class="btn btn-info waves-effect">
                                             <i class="material-icons">edit</i>
                                         </a>
                                         <button class="btn btn-danger waves-effect" type="button">
-                                            <i class="material-icons" onclick="deleteTag({{$tag->id}})">delete</i>
+                                            <i class="material-icons" onclick="deletePost({{$transaction->id}})">delete</i>
                                         </button>
-                                        <form id="delete-form-{{$tag->id}}"
-                                            action="{{route('admin.tag.destroy',$tag->id)}}" method="POST"
+                                        <form id="delete-form-{{$transaction->id}}"
+                                            action="{{route('admin.transaction.destroy',$transaction->id)}}" method="POST"
                                             style="display: none;">
                                             @csrf
                                             @method('DELETE')
@@ -102,10 +103,9 @@
 
 <script src="{{asset('assets/backend/js/pages/tables/jquery-datatable.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-{{-- <script src="sweetalert2.all.min.js"></script> --}}
 
 <script>
-    function deleteTag(id){
+    function deletePost(id){
         const swal = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-success ml-5 mr-5 px-3',
@@ -141,4 +141,5 @@
     }
 </script>
 
+<script src="https://kit.fontawesome.com/3f8ec24245.js" crossorigin="anonymous"></script>
 @endpush

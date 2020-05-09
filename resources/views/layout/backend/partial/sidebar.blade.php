@@ -53,7 +53,7 @@
             <li class="{{Request::is('admin/tag*') ? 'active' : ''}}">
                 <a href="{{route('admin.tag.index')}}">
                     <i class="material-icons">label</i>
-                    <span>Tag</span>
+                    <span>Rasa</span>
                 </a>
             </li>
             <li class="{{Request::is('admin/topping*') ? 'active' : ''}}">
@@ -84,6 +84,12 @@
                 <a href="{{route('admin.post.index')}}">
                     <i class="material-icons">library_books</i>
                     <span>Posts</span>
+                </a>
+            </li>
+            <li class="{{Request::is('admin/transaction*') ? 'active' : ''}}">
+                <a href="{{route('admin.transaction.index')}}">
+                    <i class="material-icons">library_books</i>
+                    <span>Transaksi</span>
                 </a>
             </li>
             <li class="{{Request::is('admin/favorite') ? 'active' : ''}}">

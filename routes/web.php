@@ -83,6 +83,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     Route::resource('level', 'LevelController');
     Route::resource('category', 'CategoryController');
     Route::resource('post', 'PostController');
+    Route::resource('transaction', 'TransactionController');
 
     Route::get('/favorite', 'FavoriteController@index')->name('favorite.index');
 

@@ -177,7 +177,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\xampp\\htdocs\\b-tart\\storage\\framework/cache/data',
+        'path' => 'C:\\laragon\\www\\b-tart\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -221,7 +221,7 @@
   'cart' => 
   array (
     'gross_price' => false,
-    'tax' => 21,
+    'tax' => 5,
     'database' => 
     array (
       'connection' => NULL,
@@ -232,7 +232,7 @@
     array (
       'decimals' => 2,
       'decimal_point' => '.',
-      'thousand_seperator' => ',',
+      'thousand_separator' => ',',
     ),
   ),
   'database' => 
@@ -333,12 +333,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\b-tart\\storage\\app',
+        'root' => 'C:\\laragon\\www\\b-tart\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\b-tart\\storage\\app/public',
+        'root' => 'C:\\laragon\\www\\b-tart\\storage\\app/public',
         'url' => 'localhost/storage',
         'visibility' => 'public',
       ),
@@ -388,13 +388,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\xampp\\htdocs\\b-tart\\storage\\logs/laravel.log',
+        'path' => 'C:\\laragon\\www\\b-tart\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\xampp\\htdocs\\b-tart\\storage\\logs/laravel.log',
+        'path' => 'C:\\laragon\\www\\b-tart\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -444,7 +444,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'C:\\xampp\\htdocs\\b-tart\\storage\\logs/laravel.log',
+        'path' => 'C:\\laragon\\www\\b-tart\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -467,7 +467,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\xampp\\htdocs\\b-tart\\resources\\views/vendor/mail',
+        0 => 'C:\\laragon\\www\\b-tart\\resources\\views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
@@ -539,6 +539,14 @@
       'secret' => '',
       'region' => 'us-east-1',
     ),
+    'midtrans' => 
+    array (
+      'serverKey' => 'SB-Mid-server-g9mosEDVSrZN9Jz_CeXqhxSp',
+      'clientKey' => 'SB-Mid-client-k4XrABh9h7DgdSKt',
+      'isProduction' => false,
+      'isSanitized' => true,
+      'is3ds' => true,
+    ),
   ),
   'session' => 
   array (
@@ -546,7 +554,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\xampp\\htdocs\\b-tart\\storage\\framework/sessions',
+    'files' => 'C:\\laragon\\www\\b-tart\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -596,9 +604,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\b-tart\\resources\\views',
+      0 => 'C:\\laragon\\www\\b-tart\\resources\\views',
     ),
-    'compiled' => 'C:\\xampp\\htdocs\\b-tart\\storage\\framework\\views',
+    'compiled' => 'C:\\laragon\\www\\b-tart\\storage\\framework\\views',
   ),
   'flare' => 
   array (

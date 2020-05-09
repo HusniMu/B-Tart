@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        ADD NEW TAG
+                        Tambah Rasa Baru
                     </h2>
                 </div>
                 <div class="body">

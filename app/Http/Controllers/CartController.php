@@ -33,7 +33,8 @@ class CartController extends Controller
             'toppings' => 'required',
             'level' => 'required|numeric',
             'body' => 'required',
-            'lama' => 'numeric'
+            'lama' => 'numeric',
+            'tgl_pengiriman'
         ]);
         $image = $request->file('image');
         $currentDate = Carbon::now()->toDateString();
@@ -61,6 +62,7 @@ class CartController extends Controller
         $post->image = $imageName;
         $post->body = $request->body;
         $post->lama = $request->lama;
+        $post->tgl_pengiriman = $request->tgl_pengiriman;
         $post->save();
 
         $post->categories()->attach($request->category);

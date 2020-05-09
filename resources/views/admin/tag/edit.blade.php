@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="header">
                     <h2>
-                        EDIT TAG - {{$tag->name}}
+                        EDIT RASA - {{$tag->name}}
                     </h2>
                 </div>
                 <div class="body">
