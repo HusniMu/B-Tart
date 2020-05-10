@@ -10,7 +10,7 @@ class TransactionDetail extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'transaction_id', 'order_id', 'tgl_pengiriman', 'tanggal', 'pengiriman'
+        'transactions_id', 'order_id', 'tgl_pengiriman', 'tanggal', 'pengiriman', 'jumlah'
     ];
 
     public function transaction()
@@ -20,11 +20,11 @@ class TransactionDetail extends Model
 
     public function post()
     {
-        return $this->belongsTo(Post::class, 'order_id', 'id');
+        return $this->belongsTo(Post::class, json_decode('order_id'), 'id');
     }
 
     public function custom()
     {
-        return $this->belongsTo(CustomOrder::class, 'order_id', 'id');
+        return $this->belongsTo(CustomOrder::class, json_decode('order_id'), 'id');
     }
 }

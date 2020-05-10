@@ -29,7 +29,10 @@ class TransactionController extends Controller
         $transactions = Transaction::with([
             'details', 'post', 'custom', 'user'
         ])->get();
+
+
         return view('admin.transaction.index', compact('transactions'));
+        // return dd($transactions);
     }
 
     /**
@@ -160,7 +163,15 @@ class TransactionController extends Controller
         $transaction = Transaction::with([
             'details', 'post', 'custom', 'user'
         ])->findOrFail($id);
-        return view('admin.transaction.show', compact('transaction'));
+
+        foreach($transaction->details as $details){
+            $order_id = $details->order_id;
+            $jumlah = $details->jumlah;
+        }
+
+        return view('admin.transaction.show', compact('transaction','order_id', 'jumlah'));
+        // return dd(($transaction->post_id));
+        // return dd(json_decode($order_id));
     }
 
     /**
@@ -200,20 +211,12 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->delete();
 
-        if (Storage::disk('public')->exists('post/' . $post->image)) {
-            Storage::disk('public')->delete('post/' . $post->image);
-        }
-        $post->categories()->detach();
-        $post->tags()->detach();
-        $post->toppings()->detach();
-        $post->hiasans()->detach();
-        $post->levels()->detach();
-        $post->delete();
-
-        Toastr::success('Post Successfully Deleted', 'Success');
+        Toastr::success('Transaction Successfully Deleted', 'Success');
         return redirect()->back();
     }
 }

@@ -60,7 +60,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/saveForLater/{id}','SaveForLaterController@destroy');
     Route::post('/saveForLater/moveToCart/{id}','SaveForLaterController@moveToCart');
 
+    Route::post('/checkout', 'CheckoutController@process')->name('checkout.process');
     Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+    Route::get('/checkout/confirm/{id}', 'CheckoutController@confirm')->name('checkout-success');
+
+
+
     Route::post('/finish', function(){
         return redirect()->route('welcome');
     })->name('checkout.finish');
@@ -88,8 +93,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     Route::get('/favorite', 'FavoriteController@index')->name('favorite.index');
 
     Route::get('members','MemberController@index')->name('member.index');
-    Route::get('member/{user}/edit','MemberController@edit')->name('member.edit');
-    Route::put('member/{user}','MemberController@updateAuthority')->name('member.update');
     Route::delete('member/{id}','MemberController@destroy')->name('member.destroy');
 
     Route::get('/subscriber', 'SubscriberController@index')->name('subscriber.index');

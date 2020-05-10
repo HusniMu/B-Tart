@@ -16,7 +16,7 @@ class CreateTransactionDetailsTable extends Migration
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('transactions_id');
-            $table->bigInteger('order_id');
+            $table->text('order_id');
             $table->date('tgl_pengiriman')->nullable();
             $table->string('tanggal')->nullable();
             $table->string('pengiriman')->nullable();

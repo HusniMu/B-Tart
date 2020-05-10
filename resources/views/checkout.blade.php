@@ -37,7 +37,8 @@
     <!-- Start Cart  -->
     <div class="cart-box-main">
         <div class="container">
-            <form action="">
+            <form action="{{ route('checkout.process') }}" method="post" enctype="multipart/form-data">
+            @csrf
                 <div class="row">
                     <div class="col-sm-6 col-lg-6 mb-3">
                         <div class="checkout-address">
@@ -45,30 +46,30 @@
                                 <h3>Billing address</h3>
                             </div>
                             <div class="mb-3">
-                                <label for="name">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="name" placeholder="" name="name" required>
+                                <label for="nama">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="nama" placeholder="" name="nama" required value="{{ old('nama') }}">
                                 <div class="invalid-feedback"> Nama Lengkap harus diisi. </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email">Email Address</label>
-                                <input type="email" class="form-control" id="email" placeholder="" name="email">
+                                <input type="email" class="form-control" id="email" placeholder="" name="email" value="{{ old('email') }}">
                                 <div class="invalid-feedback"> Email harus diisi. </div>
                             </div>
                             <div class="mb-3">
-                                <label for="alamat">Alamat Lengkap</label>
-                                <input type="text" class="form-control" id="alamat" placeholder="" name="alamat">
+                                <label for="alamat_lengkap">Alamat Lengkap</label>
+                                <input type="text" class="form-control" id="alamat_lengkap" placeholder="" name="alamat_lengkap" value="{{ old('alamat_lengkap') }}">
                                 <div class="invalid-feedback"> Alamat Lengkap harus diisi. </div>
                             </div>
                             <div class="mb-3">
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
                                         <label for="zip">Kode Pos</label>
-                                        <input type="text" class="form-control" id="zip" placeholder="" required>
+                                        <input type="text" class="form-control" id="zip" placeholder="" required name="zip" value="{{ old('zip') }}">
                                         <div class="invalid-feedback"> Kode Pos harus diisi. </div>
                                     </div>
                                     <div class="col-md-8 mb-3">
-                                        <label for="no_telp">No HP</label>
-                                        <input type="number" class="form-control" id="no_telp" placeholder="" name="no_telp">
+                                        <label for="no_hp">No HP</label>
+                                        <input type="number" class="form-control" id="no_hp" placeholder="" name="no_hp" value="{{ old('no_hp') }}">
                                         <div class="invalid-feedback"> No HP harus diisi. </div>
                                     </div>
                                 </div>
@@ -87,13 +88,19 @@
                                             <div class="media mb-2 border-bottom">
                                                 <div class="media-body"> <a href="{{route('post.details',$item->model->slug)}}"> {{ $item->model->title }}</a>
                                                     <div class="small text-muted">Price: Rp. {{ number_format($item->model->harga, 2, ',', '.') }} <span class="mx-2">|</span> Qty: {{ $item->qty }} <span class="mx-2">|</span> Subtotal: Rp. {{ number_format(($item->model->harga*$item->qty), 2, ',', '.') }}</div>
+                                                    <input type="hidden" name="post_id[]" value="{{ $item->model->id }}">
+                                                    <input type="hidden" name="order_id[]" value="{{ $item->model->id }}">
+                                                    <input type="hidden" name="jumlah[]" value="{{ $item->qty }}">
                                                 </div>
                                             </div>
                                         @endforeach
                                         @foreach(Cart::instance('cusPro')->content() as $item)
                                             <div class="media mb-2 border-bottom">
-                                                <div class="media-body"> <a href="{{route('post.details',$item->model->slug)}}"> {{ $item->model->title }}</a>
+                                                <div class="media-body"> <a href="javascript:void(0);">{{ $item->model->title }}</a>
                                                     <div class="small text-muted">Price: Rp. {{ number_format($item->model->harga, 2, ',', '.') }} <span class="mx-2">|</span> Qty: {{ $item->qty }} <span class="mx-2">|</span> Subtotal: Rp. {{ number_format(($item->model->harga*$item->qty), 2, ',', '.') }}</div>
+                                                    <input type="hidden" name="custom_order_id[]" value="{{ $item->model->id }}">
+                                                    <input type="hidden" name="order_id[]" value="{{ $item->model->id }}">
+                                                    <input type="hidden" name="jumlah[]" value="{{ $item->qty }}">
                                                 </div>
                                             </div>
                                         @endforeach
@@ -145,13 +152,17 @@
                                             @php
                                                 $total = ($subTotal+$subTotalTax);
                                             @endphp
-                                            <input type="hidden" name="total" value="{{ $total }}">
+                                            <input type="hidden" name="transaction_total" value="{{ $total }}">
                                             Rp. {{ number_format($total, 2, ',', '.') }}
                                         </div>
                                     </div>
                                     <hr> </div>
                             </div>
-                            <div class="col-12 d-flex shopping-box"> <a href="checkout.html" class="ml-auto btn hvr-hover">Place Order</a> </div>
+                            <div class="col-12 d-flex shopping-box">
+                                <button type="submit" class="ml-auto btn hvr-hover">
+                                    Place Order
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

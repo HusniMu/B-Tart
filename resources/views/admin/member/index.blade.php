@@ -26,7 +26,6 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Authority</th>
                                     <th>Joined At</th>
                                     <th>Action</th>
                                 </tr>
@@ -36,7 +35,6 @@
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Authority</th>
                                     <th>Joined At</th>
                                     <th>Action</th>
                                 </tr>
@@ -47,13 +45,6 @@
                                     <td>{{$key + 1}}</td>
                                     <td>{{$member->name}}</td>
                                     <td>{{$member->email}}</td>
-                                    <td>
-                                        {{$member->role->name}}
-                                        <a href="{{route('admin.member.edit',$member->id)}}"
-                                            class="btn btn-info waves-effect btn-sm">
-                                            <i class="material-icons">edit</i>
-                                        </a>
-                                    </td>
                                     <td>{{$member->created_at->toDateString()}}</td>
                                     <td class="text-center">
                                         <button class="btn btn-danger waves-effect btn-sm" type="button">

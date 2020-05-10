@@ -1,7 +1,7 @@
 @extends('layout.backend.main')
 
 
-@section('title','Detail Transaksi '.$transaction->user->name)
+@section('title','Detail Transaksi '.$transaction->id)
 
 
 @push('css')
@@ -20,7 +20,11 @@
                 </tr>
                 <tr>
                     <th>Pembeli</th>
-                    <td>{{ $transaction->user->name }}</td>
+                    <td>
+                        @if(isset($transaction->user))
+                            {{$transaction->user->name}}
+                        @endif
+                    </td>
                 </tr>
                 <tr>
                     <th>Nama Penerima</th>
@@ -64,24 +68,28 @@
                                 <th>
                                     tanggal pengiriman
                                 </th>
+                                <th>
+                                    jumlah
+                                </th>
                             </tr>
-                            @foreach($transaction->details as $detail)
-                            <tr>
-                                <td>
-                                    {{ $detail->id }}
-                                </td>
-                                <td>
-                                    @if(isset($detail->post->title))
-                                        {{ $detail->post->title }}
-                                    @else
-                                        {{ $detail->custom->title }}
-                                    @endif
-                                </td>
-                                <td>
-                                    {{ $detail->tgl_pengiriman }}
-                                </td>
-                            </tr>
-                            @endforeach
+                            {{-- @foreach($order_id as $id) --}}
+                                @foreach($transaction->details as $key=>$detail)
+                                <tr>
+                                    <td>
+                                        {{ $key++ }}
+                                    </td>
+                                    <td>
+                                        {{ $order_id }}
+                                    </td>
+                                    <td>
+                                        {{ $detail->tgl_pengiriman }}
+                                    </td>
+                                    <td>
+                                        {{ $jumlah }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            {{-- @endforeach --}}
                         </table>
                     </td>
                 </tr>

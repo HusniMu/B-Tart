@@ -53,9 +53,28 @@
                                 @foreach ($transactions as $transaction)
                                 <tr>
                                     <td>{{$transaction->id}}</td>
-                                    <td>{{ $transaction->post->title}}</td>
-                                    <td>{{$transaction->custom->title}}</td>
-                                    <td>{{$transaction->user->name}}</td>
+                                    <td>
+                                        @if(isset($transaction->post))
+                                            @foreach($transaction->post as $post)
+                                            {{ $post->id}}
+                                            @endforeach
+                                        @endif
+
+                                        {{ $transaction->post_id }}
+                                    </td>
+                                    <td>
+                                        @if(isset($transaction->custom))
+                                            @foreach($transaction->custom as $custom)
+                                            {{ $custom->id}}
+                                            @endforeach
+                                        @endif
+                                        {{ $transaction->custom_order_id }}
+                                    </td>
+                                    <td>
+                                        @if(isset($transaction->user))
+                                            {{$transaction->user->name}}
+                                        @endif
+                                    </td>
                                     <td>{{$transaction->transaction_total}}</td>
                                     <td>{{$transaction->transaction_status}}</td>
                                     <td>

@@ -69,6 +69,6 @@ class User extends Authenticatable
 
     public function scopeMembers($query)
     {
-        return $query->where('role_id',3);
+        return $query->where('role_id',2);
     }
 }
