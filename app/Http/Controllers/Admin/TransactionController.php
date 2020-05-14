@@ -88,7 +88,7 @@ class TransactionController extends Controller
         }
 
         $post = new Post();
-        $post->user_id = Auth::id();
+        $post->users_id = Auth::id();
         $post->title = ucwords($request->title);
         $post->slug = $slug;
         $post->harga = $request->harga;

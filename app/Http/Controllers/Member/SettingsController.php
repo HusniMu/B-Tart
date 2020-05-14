@@ -23,8 +23,7 @@ class SettingsController extends Controller
     {
         // return $request;
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email',
+            'name' => 'min:3',
             'image' => 'image',
         ]);
         $image = $request->file('image');
@@ -48,9 +47,7 @@ class SettingsController extends Controller
         }
 
         $user->name = $request->name;
-        $user->email = $request->email;
         $user->image = $imageName;
-        $user->about = $request->about;
         $user->save();
 
         Toastr::success('Profile Successfully Updated', 'Success');

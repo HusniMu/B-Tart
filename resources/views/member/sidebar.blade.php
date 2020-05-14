@@ -1,14 +1,14 @@
-<div class="col-lg-4 col-md-12 ">
-
-    <div class="single-post info-area ">
-
-        <div class="about-area">
-            <h4 class="title"><b>MEMBER PROFILE</b></h4>
-            <p><a href="{{route('member.dashboard')}}">Dashboard</a></p>
-            <p><a href="{{route('member.settings')}}">Update Profile</a></p>
-        </div>
-
-
-    </div><!-- info-area -->
-
-</div><!-- col-lg-4 col-md-12 -->
+<div class="contact-info-left">
+    <h2>Member Profile</h2>
+    <ul>
+        <li>
+            <a href="{{route('member.dashboard')}}">Dashboard</a>
+        </li>
+        <li>
+            <a href="{{route('member.wishlist')}}">Wishlist</a>
+        </li>
+        <li>
+            <a href="{{route('member.settings')}}">Update Profile</a>
+        </li>
+    </ul>
+</div>

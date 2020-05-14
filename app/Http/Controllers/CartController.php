@@ -53,41 +53,41 @@ class CartController extends Controller
             $imageName = "default.png";
         }
 
-        $post = new CustomOrder();
-        $post->id = $request->id;
-        $post->user_id = Auth::id();
-        $post->title = ucwords($request->title);
-        $post->slug = $slug;
-        $post->harga = $request->harga;
-        $post->image = $imageName;
-        $post->body = $request->body;
-        $post->lama = $request->lama;
-        $post->tgl_pengiriman = $request->tgl_pengiriman;
-        $post->save();
+        $custom = new CustomOrder();
+        $custom->id = $request->id;
+        $custom->user_id = Auth::id();
+        $custom->title = ucwords($request->title);
+        $custom->slug = $slug;
+        $custom->harga = $request->harga;
+        $custom->image = $imageName;
+        $custom->body = $request->body;
+        $custom->lama = $request->lama;
+        $custom->tgl_pengiriman = $request->tgl_pengiriman;
+        $custom->save();
 
-        $post->categories()->attach($request->category);
-        $post->tags()->attach($request->tags);
-        $post->toppings()->attach($request->toppings);
-        $post->hiasans()->attach($request->hiasans);
-        $post->levels()->attach($request->level);
+        $custom->categories()->attach($request->category);
+        $custom->tags()->attach($request->tags);
+        $custom->toppings()->attach($request->toppings);
+        $custom->hiasans()->attach($request->hiasans);
+        $custom->levels()->attach($request->level);
 
-        // foreach($post->tags as $tag){
+        // foreach($custom->tags as $tag){
         //     $harga_tmp = $tag->harga;
-        //     $post->harga += $harga_tmp;
+        //     $custom->harga += $harga_tmp;
         // }
-        // foreach($post->toppings as $topping){
+        // foreach($custom->toppings as $topping){
         //     $harga_tmp = $topping->harga;
-        //     $post->harga += $harga_tmp;
+        //     $custom->harga += $harga_tmp;
         // }
-        // foreach($post->hiasans as $hiasan){
+        // foreach($custom->hiasans as $hiasan){
         //     $harga_tmp = $hiasan->harga;
-        //     $post->harga += $harga_tmp;
+        //     $custom->harga += $harga_tmp;
         // }
-        // foreach($post->levels as $level){
+        // foreach($custom->levels as $level){
         //     $harga_tmp = $level->harga;
-        //     $post->harga += $harga_tmp;
+        //     $custom->harga += $harga_tmp;
         // }
-        // $post->save();
+        $custom->save();
 
 
         $duplicate = \Cart::search(function($cartItem, $rowId) use ($request){

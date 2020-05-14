@@ -14,7 +14,11 @@ use Veritrans_Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Brian2694\Toastr\Facades\Toastr;
+use Exception;
 use Illuminate\Support\Facades\Auth;
+
+use Midtrans\Config;
+use Midtrans\Snap;
 
 class CheckoutController extends Controller
 {
@@ -26,8 +30,6 @@ class CheckoutController extends Controller
             'alamat_lengkap' => 'required',
             'zip' => 'required|numeric',
             'no_hp' => 'required|numeric',
-            'post_id' => 'required',
-            'custom_order_id' => 'required',
             'order_id' => 'required',
             'jumlah' => 'required',
             'transaction_total' => 'required',
@@ -36,7 +38,7 @@ class CheckoutController extends Controller
         $transaction = Transaction::create([
             'post_id' => json_encode($request->post_id),
             'custom_order_id' => json_encode($request->custom_order_id),
-            'user_id' => Auth::user()->id,
+            'users_id' => Auth::user()->id,
             'transaction_total' => $request->transaction_total,
             'nama' => $request->nama,
             'email' => $request->email,
@@ -61,8 +63,38 @@ class CheckoutController extends Controller
         Cart::instance('cusPro')->destroy();
         // return var_dump($transaction_detail);
 
-        Toastr::success('Transaction Success', 'Success');
-        return redirect(route('home'));
+        // Toastr::success('Transaction Success', 'Success');
+        // return redirect(route('home'));
+
+        // set konfigurasi midtrans
+        Config::$serverKey = config('midtrans.serverKey');
+        Config::$isProduction = config('midtrans.isProduction');
+        Config::$isSanitized = config('midtrans.isSanitized');
+        Config::$is3ds = config('midtrans.is3ds');
+
+        // buat array untuk dikir ke midtrans
+        $midtrans_params = [
+            'transaction_details' => [
+                'order_id' => 'MIDTRANS-'.$transaction->id,
+                'gross_amount' => (int) $transaction->transaction_total
+            ],
+            'customer_details' => [
+                'first_name' => $transaction->user->name,
+                'email' => $transaction->user->email,
+            ],
+            'enabled_payments' => ['gopay'],
+            'vtweb' => []
+        ];
+
+        try{
+            // ambil halaman payment midtrans
+            $paymentUrl = Snap::createTransaction($midtrans_params)->redirect_url;
+
+            // redirect ke halaman midtrans
+            header('Location: '. $paymentUrl);
+        } catch(Exception $e){
+            echo $e->getMessage();
+        }
     }
 
     public function index()
@@ -71,9 +103,41 @@ class CheckoutController extends Controller
         return view('checkout',compact('produk'));
     }
 
-    public function success(Request $request)
-    {
-        # code...
-    }
+    // public function success(Request $request, $id)
+    // {
+    //     $transaction = Transaction::with([
+    //         'details', 'post', 'custom',
+    //     ])
+
+    //     // set konfigurasi midtrans
+    //     Config::$serverKey = config('midtrans.serverKey');
+    //     Config::$isProduction = config('midtrans.isProduction');
+    //     Config::$isSanitized = config('midtrans.isSanitized');
+    //     Config::$is3ds = config('midtrans.is3ds');
+
+    //     // buat array untuk dikir ke midtrans
+    //     $midtrans_params = [
+    //         'transaction_details' => [
+    //             'order_id' => 'MIDTRANS-'.$transaction->id,
+    //             'gross_amout' => (int) $transaction->transaction_total
+    //         ],
+    //         'customer_details' => [
+    //             'first_name' => $transaction->user->name,
+    //             'email' => $transaction->user->email
+    //         ],
+    //         'enabled_patments' = ['gopay'],
+    //         'vtweb' => []
+    //     ];
+
+    //     try{
+    //         // ambil halaman payment midtrans
+    //         $paymentUrl = Snap::createTransaction($midtrans_params)->redirect_url;
+
+    //         // redirect ke halaman midtrans
+    //         header('Location: '. $paymentUrl);
+    //     } catch(Exception $e){
+    //         echo $e->getMessage();
+    //     }
+    // }
 
 }

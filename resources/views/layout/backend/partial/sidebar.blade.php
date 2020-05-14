@@ -86,6 +86,12 @@
                     <span>Posts</span>
                 </a>
             </li>
+            <li class="{{Request::is('admin/custom*') ? 'active' : ''}}">
+                <a href="{{route('admin.custom.index')}}">
+                    <i class="material-icons">library_books</i>
+                    <span>custom order</span>
+                </a>
+            </li>
             <li class="{{Request::is('admin/transaction*') ? 'active' : ''}}">
                 <a href="{{route('admin.transaction.index')}}">
                     <i class="material-icons">library_books</i>

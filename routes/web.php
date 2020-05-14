@@ -62,7 +62,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/checkout', 'CheckoutController@process')->name('checkout.process');
     Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
-    Route::get('/checkout/confirm/{id}', 'CheckoutController@confirm')->name('checkout-success');
+    // Route::get('/checkout/confirm/{id}', 'CheckoutController@confirm')->name('checkout-success');
+
+    Route::post('/midtrans/callback', 'MidtransController@notificationHandler');
+    Route::post('/midtrans/finish', 'MidtransController@finishRedirect');
+    Route::post('/midtrans/unfinish', 'MidtransController@unfinishRedirect');
+    Route::post('/midtrans/failed', 'MidtransController@failedRedirect');
 
 
 
@@ -88,6 +93,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     Route::resource('level', 'LevelController');
     Route::resource('category', 'CategoryController');
     Route::resource('post', 'PostController');
+    Route::resource('custom', 'CustomController');
     Route::resource('transaction', 'TransactionController');
 
     Route::get('/favorite', 'FavoriteController@index')->name('favorite.index');
@@ -101,6 +107,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
 
 Route::group(['as'=>'member.','prefix'=>'member','namespace'=>'Member','middleware'=>['auth','member']],function(){
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('transaction-detail/{id}', 'DashboardController@detail')->name('transaction-detail');
+    Route::get('wishlist', 'DashboardController@wishlist')->name('wishlist');
 
     Route::get('settings', 'SettingsController@index')->name('settings');
     Route::put('profile-update', 'SettingsController@updateProfile')->name('profile.update');
