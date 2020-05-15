@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h2>CONTACT US</h2>
+                <h2>{{Auth::user()->name}} Dashboard </h2>
             </div>
         </div>
     </div>
